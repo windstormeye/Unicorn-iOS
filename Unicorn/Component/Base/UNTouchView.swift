@@ -10,12 +10,26 @@ import UIKit
 
 class UNTouchView: UIView {
 
-    var isSelected: Bool = true
+    var isSelected = false {
+        didSet {
+            if isSelected {
+                closeButton.isHidden = false
+            } else {
+                closeButton.isHidden = true
+            }
+        }
+    }
     var viewDelegate: UNTouchViewProtocol?
+    
+    private var closeButton = UIButton()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
         initView()
+    }
+    
+    override func layoutSubviews() {
+        initLayout()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -25,12 +39,16 @@ class UNTouchView: UIView {
     private func initView() {
         isUserInteractionEnabled = true
         
-        let closeButton = UIButton(frame: CGRect(x: 0, y: 0, width: 24, height: 24))
-        closeButton.center = CGPoint(x: -12, y: -12)
         closeButton.setImage(UIImage(named: "story_maker_close"), for: .normal)
         closeButton.backgroundColor = .black
         closeButton.layer.cornerRadius = 12
         closeButton.layer.masksToBounds = true
+        closeButton.isHidden = true
+    }
+    
+    private func initLayout() {
+        closeButton.frame = CGRect(x: 0, y: 0, width: 24, height: 24)
+        closeButton.center = .zero
         addSubview(closeButton)
     }
     

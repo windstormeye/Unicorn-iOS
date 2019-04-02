@@ -48,7 +48,7 @@ class UNSticerView: UNTouchView {
     override var isSelected: Bool {
         didSet {
             if isSelected {
-                stickerImageView.layer.borderWidth = 2
+                stickerImageView.layer.borderWidth = 1
             } else {
                 stickerImageView.layer.borderWidth = 0
             }
