@@ -13,6 +13,10 @@
 		0C51B80F2249169B00046753 /* UNContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C51B80E2249169B00046753 /* UNContentViewController.swift */; };
 		0C784A452253B4D500D1025A /* UNTextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C784A442253B4D500D1025A /* UNTextViewController.swift */; };
 		0C784A472253B8D700D1025A /* Define.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C784A462253B8D700D1025A /* Define.swift */; };
+		0C784A4A2254DADF00D1025A /* UNBottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C784A492254DADF00D1025A /* UNBottomView.swift */; };
+		0C784A4F2255A69900D1025A /* PJLineCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C784A4D2255A69900D1025A /* PJLineCollectionViewCell.swift */; };
+		0C784A502255A69900D1025A /* PJLineCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C784A4E2255A69900D1025A /* PJLineCollectionViewLayout.swift */; };
+		0C784A522255A6AE00D1025A /* PJLineCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C784A512255A6AE00D1025A /* PJLineCollectionView.swift */; };
 		0CDB64732247CDB600ED48D0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CDB64722247CDB600ED48D0 /* AppDelegate.swift */; };
 		0CDB647A2247CDB700ED48D0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0CDB64792247CDB700ED48D0 /* Assets.xcassets */; };
 		0CDB647D2247CDB700ED48D0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0CDB647B2247CDB700ED48D0 /* LaunchScreen.storyboard */; };
@@ -27,6 +31,10 @@
 		0C51B80E2249169B00046753 /* UNContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UNContentViewController.swift; sourceTree = "<group>"; };
 		0C784A442253B4D500D1025A /* UNTextViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UNTextViewController.swift; sourceTree = "<group>"; };
 		0C784A462253B8D700D1025A /* Define.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Define.swift; sourceTree = "<group>"; };
+		0C784A492254DADF00D1025A /* UNBottomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UNBottomView.swift; sourceTree = "<group>"; };
+		0C784A4D2255A69900D1025A /* PJLineCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PJLineCollectionViewCell.swift; sourceTree = "<group>"; };
+		0C784A4E2255A69900D1025A /* PJLineCollectionViewLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PJLineCollectionViewLayout.swift; sourceTree = "<group>"; };
+		0C784A512255A6AE00D1025A /* PJLineCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PJLineCollectionView.swift; sourceTree = "<group>"; };
 		0CDB646F2247CDB600ED48D0 /* Unicorn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Unicorn.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0CDB64722247CDB600ED48D0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0CDB64792247CDB700ED48D0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -67,6 +75,7 @@
 		0C51B80D2249168500046753 /* Base */ = {
 			isa = PBXGroup;
 			children = (
+				0C784A542255A6C200D1025A /* BottomView */,
 				0CDB6489224905F100ED48D0 /* UNTouchView.swift */,
 				0C51B80E2249169B00046753 /* UNContentViewController.swift */,
 			);
@@ -79,6 +88,25 @@
 				0C784A462253B8D700D1025A /* Define.swift */,
 			);
 			path = Config;
+			sourceTree = "<group>";
+		};
+		0C784A532255A6B200D1025A /* BottomCollectionView */ = {
+			isa = PBXGroup;
+			children = (
+				0C784A4D2255A69900D1025A /* PJLineCollectionViewCell.swift */,
+				0C784A512255A6AE00D1025A /* PJLineCollectionView.swift */,
+				0C784A4E2255A69900D1025A /* PJLineCollectionViewLayout.swift */,
+			);
+			path = BottomCollectionView;
+			sourceTree = "<group>";
+		};
+		0C784A542255A6C200D1025A /* BottomView */ = {
+			isa = PBXGroup;
+			children = (
+				0C784A492254DADF00D1025A /* UNBottomView.swift */,
+				0C784A532255A6B200D1025A /* BottomCollectionView */,
+			);
+			path = BottomView;
 			sourceTree = "<group>";
 		};
 		0CDB64662247CDB600ED48D0 = {
@@ -208,12 +236,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0C784A522255A6AE00D1025A /* PJLineCollectionView.swift in Sources */,
+				0C784A4A2254DADF00D1025A /* UNBottomView.swift in Sources */,
 				0C51B80822490B1800046753 /* UIView.swift in Sources */,
 				0C784A472253B8D700D1025A /* Define.swift in Sources */,
 				0C51B80C22490FA600046753 /* UNSticerView.swift in Sources */,
+				0C784A502255A69900D1025A /* PJLineCollectionViewLayout.swift in Sources */,
 				0CDB648A224905F100ED48D0 /* UNTouchView.swift in Sources */,
 				0CDB64852247CE2900ED48D0 /* UNHomeViewController.swift in Sources */,
 				0C784A452253B4D500D1025A /* UNTextViewController.swift in Sources */,
+				0C784A4F2255A69900D1025A /* PJLineCollectionViewCell.swift in Sources */,
 				0CDB64732247CDB600ED48D0 /* AppDelegate.swift in Sources */,
 				0C51B80F2249169B00046753 /* UNContentViewController.swift in Sources */,
 				0C51B80A22490C7E00046753 /* UIColor.swift in Sources */,
