@@ -11,7 +11,14 @@ import UIKit
 class UNTextViewController: UIViewController {
 
     private var textView = UITextView()
-    private var bottomView = UNBottomView()
+    private var bottomCollectionView: PJLineCollectionView?
+    private var itemImageNames = ["字体", "大小", "颜色", "背景"]
+    private var textFonts = ["FZLuXunTiS-R-GB",
+                             "FZQingFangSongS",
+                             "FZZJ-FOJW",
+                             "FZZJ-HTKSJW",
+                             "FZZJ-MSMLJW",
+                             "FZZJ-ZJJYBKTJW"]
     
     private let topViewBottom = topSafeAreaHeight + 10 + 30
     
@@ -31,6 +38,7 @@ class UNTextViewController: UIViewController {
         doneButton.titleLabel?.font = backButton.titleLabel?.font
         doneButton.setTitle("✓", for: .normal)
         
+        
         textView.frame = CGRect(x: 15, y: backButton.bottom + 10, width: view.width - 30, height: 300)
         textView.backgroundColor = .clear
         textView.textAlignment = .center
@@ -40,10 +48,34 @@ class UNTextViewController: UIViewController {
         textView.textColor = .white
         textView.keyboardAppearance = .dark
         view.addSubview(textView)
+
         
-        bottomView.frame = CGRect(x: 0, y: view.height - bottomSafeAreaHeight - 64, width: view.width, height: 64)
-        view.addSubview(bottomView)
-        bottomView.itemImageNames = ["2", "2", "2", "2"]
+        let collectionViewLayout = UICollectionViewFlowLayout()
+        let itemW = 50
+        var itemCount = CGFloat(itemImageNames.count)
+        if itemCount > 5 { itemCount = CGFloat(5) }
+        let innerW = (screenWidth - itemCount * 50) / itemCount
+        collectionViewLayout.itemSize = CGSize(width: itemW , height: itemW)
+        collectionViewLayout.minimumLineSpacing = innerW
+        collectionViewLayout.minimumInteritemSpacing = 10
+        collectionViewLayout.scrollDirection = .horizontal
+        collectionViewLayout.sectionInset = UIEdgeInsets(top: 0, left: innerW / 2, bottom: 0, right: innerW / 2)
+        
+        let collectionView = PJLineCollectionView(frame: CGRect(x: 0, y: view.height - bottomSafeAreaHeight - 64, width: view.width, height: 64), collectionViewLayout: collectionViewLayout)
+        self.bottomCollectionView = collectionView
+        collectionView.viewModels = itemImageNames
+        view.addSubview(collectionView)
+        
+        collectionView.cellSelected = { cellIndex in
+            switch cellIndex {
+            case 0: self.textView.font = UIFont.systemFont(ofSize: 22, weight: .light)
+            self.present(self.fontBottomView, animated: true, completion: nil)
+            case 1: self.textView.font = UIFont.systemFont(ofSize: 25)
+            case 2: self.textView.textColor = .red
+            case 3: break
+            default: break
+            }
+        }
         
         NotificationCenter.default.addObserver(self, selector: .keyboardFrame, name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
     }
@@ -56,10 +88,10 @@ class UNTextViewController: UIViewController {
         print(offsetY)
         UIView.animate(withDuration: 0.3) {
             if offsetY == 0 {
-                self.bottomView.transform = CGAffineTransform(translationX: 0, y: 0)
+                self.bottomCollectionView!.transform = CGAffineTransform(translationX: 0, y: 0)
             }else{
-                self.bottomView.transform = CGAffineTransform(translationX: 0, y: offsetY)
-                self.textView.height = self.view.height - abs(offsetY) - self.topViewBottom - 45 - self.bottomView.height
+                self.bottomCollectionView!.transform = CGAffineTransform(translationX: 0, y: offsetY)
+                self.textView.height = self.view.height - abs(offsetY) - self.topViewBottom - 45 - self.bottomCollectionView!.height
             }
         }
     }
@@ -67,8 +99,37 @@ class UNTextViewController: UIViewController {
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
+    
+    /// 字体
+    lazy var fontBottomView: UNBottomFontsTableViewController = {
+        let sb = UIStoryboard(name: "UNBottomFontsTableViewController", bundle: nil)
+        let fontPopover = sb.instantiateViewController(withIdentifier: "UNBottomFontsTableViewController") as! UNBottomFontsTableViewController;
+        fontPopover.preferredContentSize = CGSize(width: 200, height: 250)
+        fontPopover.modalPresentationStyle = .popover
+        fontPopover.fonts = self.textFonts
+        
+        let fontPopoverPVC = fontPopover.popoverPresentationController
+        fontPopoverPVC?.sourceView = self.bottomCollectionView
+        fontPopoverPVC?.sourceRect = CGRect(x: bottomCollectionView!.cellCenterXs[0], y: 0, width: 0, height: 0)
+        fontPopoverPVC?.permittedArrowDirections = .down
+        fontPopoverPVC?.delegate = self
+        fontPopoverPVC?.backgroundColor = .white
+        
+        fontPopover.cellSelected = { selectedIndex in
+            self.textView.font = UIFont(name: self.textFonts[selectedIndex], size: 22)
+            fontPopover.dismiss(animated: true, completion: nil)
+        }
+        
+        return fontPopover
+    }()
 }
 
 private extension Selector {
     static let keyboardFrame = #selector(UNTextViewController.keyBoardFrameChange(_:))
+}
+
+extension UNTextViewController: UIPopoverPresentationControllerDelegate {
+    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
+        return .none
+    }
 }
