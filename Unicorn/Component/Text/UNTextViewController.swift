@@ -12,7 +12,8 @@ class UNTextViewController: UIViewController {
 
     private var textView = UITextView()
     private var bottomCollectionView: PJLineCollectionView?
-    private var itemImageNames = ["字体", "大小", "颜色", "背景"]
+    private var itemImageNames = ["字体", "大小", "颜色"]
+    private var itemColors = [UIColor.black, UIColor.white, UIColor.red, UIColor.blue, UIColor.green]
     private var textFonts = ["FZLuXunTiS-R-GB",
                              "FZQingFangSongS",
                              "FZZJ-FOJW",
@@ -21,7 +22,6 @@ class UNTextViewController: UIViewController {
                              "FZZJ-ZJJYBKTJW"]
     
     private let topViewBottom = topSafeAreaHeight + 10 + 30
-    private var textViewSize: CGFloat = 22.0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,16 +63,22 @@ class UNTextViewController: UIViewController {
         collectionViewLayout.sectionInset = UIEdgeInsets(top: 0, left: innerW / 2, bottom: 0, right: innerW / 2)
         
         let collectionView = PJLineCollectionView(frame: CGRect(x: 0, y: view.height - bottomSafeAreaHeight - 64, width: view.width, height: 64), collectionViewLayout: collectionViewLayout)
+        collectionView.backgroundColor = .darkGray
         self.bottomCollectionView = collectionView
         collectionView.viewModels = itemImageNames
         view.addSubview(collectionView)
         
         collectionView.cellSelected = { cellIndex in
             switch cellIndex {
-            case 0: self.present(self.fontBottomView, animated: true, completion: nil)
-            case 1: self.present(self.sizeBottomView, animated: true, completion: nil)
-            case 2: self.textView.textColor = .red
-            case 3: break
+            case 0: self.present(self.fontBottomView,
+                                 animated: true,
+                                 completion: nil)
+            case 1: self.present(self.sizeBottomView,
+                                 animated: true,
+                                 completion: nil)
+            case 2: self.present(self.colorBottomView,
+                                 animated: true,
+                                 completion: nil)
             default: break
             }
         }
@@ -104,7 +110,7 @@ class UNTextViewController: UIViewController {
         get {
             let sb = UIStoryboard(name: "UNBottomFontsTableViewController", bundle: nil)
             let fontPopover = sb.instantiateViewController(withIdentifier: "UNBottomFontsTableViewController") as! UNBottomFontsTableViewController;
-            fontPopover.preferredContentSize = CGSize(width: 200, height: 250)
+            fontPopover.preferredContentSize = CGSize(width: 150, height: 250)
             fontPopover.modalPresentationStyle = .popover
             fontPopover.fonts = self.textFonts
             
@@ -116,7 +122,7 @@ class UNTextViewController: UIViewController {
             fontPopoverPVC?.backgroundColor = .white
             
             fontPopover.cellSelected = { selectedIndex in
-                self.textView.font = UIFont(name: self.textFonts[selectedIndex], size: 22)
+                self.textView.font = UIFont(name: self.textFonts[selectedIndex], size: self.textView.font!.pointSize)
                 fontPopover.dismiss(animated: true, completion: nil)
             }
             return fontPopover
@@ -127,7 +133,7 @@ class UNTextViewController: UIViewController {
     private var sizeBottomView: UNBottomSizeViewController {
         get {
             let sizePopover = UNBottomSizeViewController()
-            sizePopover.size = textViewSize
+            sizePopover.size = self.textView.font?.pointSize
             sizePopover.preferredContentSize = CGSize(width: 200, height: 100)
             sizePopover.modalPresentationStyle = .popover
             
@@ -140,10 +146,32 @@ class UNTextViewController: UIViewController {
             
             sizePopover.sizeChange = { size in
                 self.textView.font = UIFont(name: self.textView.font!.familyName, size: size)
-                self.textViewSize = size
             }
             
             return sizePopover
+        }
+    }
+    
+    /// 颜色
+    private var colorBottomView: UNBottomColorViewController {
+        get {
+            let colorPopover = UNBottomColorViewController()
+            colorPopover.colors = itemColors
+            colorPopover.preferredContentSize = CGSize(width: 200, height: 280)
+            colorPopover.modalPresentationStyle = .popover
+            
+            let colorPopoverPVC = colorPopover.popoverPresentationController
+            colorPopoverPVC?.sourceView = self.bottomCollectionView
+            colorPopoverPVC?.sourceRect = CGRect(x: bottomCollectionView!.cellCenterXs[2], y: 0, width: 0, height: 0)
+            colorPopoverPVC?.permittedArrowDirections = .down
+            colorPopoverPVC?.delegate = self
+            colorPopoverPVC?.backgroundColor = .white
+            
+            colorPopover.colorChange = { color in
+                self.textView.textColor = color
+            }
+            
+            return colorPopover
         }
     }
 }

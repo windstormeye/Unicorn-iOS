@@ -10,11 +10,10 @@ import UIKit
 
 class PJLineCollectionViewCell: UICollectionViewCell {
     var viewModel = "" {didSet { setViewModel()}}
-    
-    private let fonts = ["PingFang SC", ""]
+    var viewColorModel: UIColor? {didSet{backgroundColor = viewColorModel}}
+    var type: PJLineCollectionView.LineType = .text {didSet{setType()}}
     
     private var tipsLabel: UILabel?
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         initView()
@@ -35,5 +34,19 @@ class PJLineCollectionViewCell: UICollectionViewCell {
     
     private func setViewModel() {
         tipsLabel!.text = viewModel
+    }
+    
+    private func setType() {
+        switch type {
+        case .text:
+            tipsLabel?.isHidden = false
+        case .color:
+            tipsLabel?.isHidden = true
+            backgroundColor = viewColorModel
+            layer.cornerRadius = width / 2
+            layer.borderColor = UIColor.rgb(220, 220, 220).cgColor
+            layer.borderWidth = 1
+            
+        }
     }
 }

@@ -9,6 +9,14 @@
 /* Begin PBXBuildFile section */
 		0C13E94F2256E9F000346A2D /* UNBottomSizeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C13E94D2256E9F000346A2D /* UNBottomSizeViewController.swift */; };
 		0C13E9502256E9F000346A2D /* UNBottomSizeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0C13E94E2256E9F000346A2D /* UNBottomSizeViewController.xib */; };
+		0C13E95322571CB500346A2D /* EFHSBView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C13E95222571CB500346A2D /* EFHSBView.swift */; };
+		0C13E95522572B0000346A2D /* EFColorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C13E95422572B0000346A2D /* EFColorView.swift */; };
+		0C13E95722572B2400346A2D /* EFColorWheelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C13E95622572B2400346A2D /* EFColorWheelView.swift */; };
+		0C13E95922572B2F00346A2D /* EFColorComponentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C13E95822572B2F00346A2D /* EFColorComponentView.swift */; };
+		0C13E95B22572B4A00346A2D /* EFSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C13E95A22572B4A00346A2D /* EFSliderView.swift */; };
+		0C13E95D22572B6100346A2D /* EFThumbView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C13E95C22572B6100346A2D /* EFThumbView.swift */; };
+		0C13E95F22572B8A00346A2D /* EFControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C13E95E22572B8A00346A2D /* EFControl.swift */; };
+		0C13E96122573B8A00346A2D /* UNBottomColorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C13E96022573B8A00346A2D /* UNBottomColorViewController.swift */; };
 		0C51B80822490B1800046753 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C51B80722490B1800046753 /* UIView.swift */; };
 		0C51B80A22490C7E00046753 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C51B80922490C7E00046753 /* UIColor.swift */; };
 		0C51B80C22490FA600046753 /* UNSticerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C51B80B22490FA600046753 /* UNSticerView.swift */; };
@@ -36,6 +44,14 @@
 /* Begin PBXFileReference section */
 		0C13E94D2256E9F000346A2D /* UNBottomSizeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UNBottomSizeViewController.swift; sourceTree = "<group>"; };
 		0C13E94E2256E9F000346A2D /* UNBottomSizeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UNBottomSizeViewController.xib; sourceTree = "<group>"; };
+		0C13E95222571CB500346A2D /* EFHSBView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EFHSBView.swift; sourceTree = "<group>"; };
+		0C13E95422572B0000346A2D /* EFColorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EFColorView.swift; sourceTree = "<group>"; };
+		0C13E95622572B2400346A2D /* EFColorWheelView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EFColorWheelView.swift; sourceTree = "<group>"; };
+		0C13E95822572B2F00346A2D /* EFColorComponentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EFColorComponentView.swift; sourceTree = "<group>"; };
+		0C13E95A22572B4A00346A2D /* EFSliderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EFSliderView.swift; sourceTree = "<group>"; };
+		0C13E95C22572B6100346A2D /* EFThumbView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EFThumbView.swift; sourceTree = "<group>"; };
+		0C13E95E22572B8A00346A2D /* EFControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EFControl.swift; sourceTree = "<group>"; };
+		0C13E96022573B8A00346A2D /* UNBottomColorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UNBottomColorViewController.swift; sourceTree = "<group>"; };
 		0C51B80722490B1800046753 /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		0C51B80922490C7E00046753 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		0C51B80B22490FA600046753 /* UNSticerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UNSticerView.swift; sourceTree = "<group>"; };
@@ -82,10 +98,26 @@
 			path = Size;
 			sourceTree = "<group>";
 		};
+		0C13E95122571CAC00346A2D /* Color */ = {
+			isa = PBXGroup;
+			children = (
+				0C13E95A22572B4A00346A2D /* EFSliderView.swift */,
+				0C13E95822572B2F00346A2D /* EFColorComponentView.swift */,
+				0C13E95E22572B8A00346A2D /* EFControl.swift */,
+				0C13E95622572B2400346A2D /* EFColorWheelView.swift */,
+				0C13E95C22572B6100346A2D /* EFThumbView.swift */,
+				0C13E95422572B0000346A2D /* EFColorView.swift */,
+				0C13E95222571CB500346A2D /* EFHSBView.swift */,
+				0C13E96022573B8A00346A2D /* UNBottomColorViewController.swift */,
+			);
+			path = Color;
+			sourceTree = "<group>";
+		};
 		0C3814AC2253A72E0055E56A /* Text */ = {
 			isa = PBXGroup;
 			children = (
 				0C784A442253B4D500D1025A /* UNTextViewController.swift */,
+				0C13E95122571CAC00346A2D /* Color */,
 				0C13E94C2256E97800346A2D /* Size */,
 				0C784A5E225649F000D1025A /* Font */,
 			);
@@ -287,19 +319,27 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0C13E95722572B2400346A2D /* EFColorWheelView.swift in Sources */,
 				0C784A522255A6AE00D1025A /* PJLineCollectionView.swift in Sources */,
+				0C13E95F22572B8A00346A2D /* EFControl.swift in Sources */,
+				0C13E95D22572B6100346A2D /* EFThumbView.swift in Sources */,
+				0C13E95522572B0000346A2D /* EFColorView.swift in Sources */,
 				0C51B80822490B1800046753 /* UIView.swift in Sources */,
 				0C784A6522564A4F00D1025A /* UNBottomFontsTableViewController.swift in Sources */,
 				0C784A472253B8D700D1025A /* Define.swift in Sources */,
 				0C51B80C22490FA600046753 /* UNSticerView.swift in Sources */,
 				0C784A502255A69900D1025A /* PJLineCollectionViewLayout.swift in Sources */,
 				0CDB648A224905F100ED48D0 /* UNTouchView.swift in Sources */,
+				0C13E95922572B2F00346A2D /* EFColorComponentView.swift in Sources */,
 				0CDB64852247CE2900ED48D0 /* UNHomeViewController.swift in Sources */,
+				0C13E95322571CB500346A2D /* EFHSBView.swift in Sources */,
 				0C784A452253B4D500D1025A /* UNTextViewController.swift in Sources */,
 				0C784A4F2255A69900D1025A /* PJLineCollectionViewCell.swift in Sources */,
 				0C13E94F2256E9F000346A2D /* UNBottomSizeViewController.swift in Sources */,
 				0CDB64732247CDB600ED48D0 /* AppDelegate.swift in Sources */,
+				0C13E95B22572B4A00346A2D /* EFSliderView.swift in Sources */,
 				0C51B80F2249169B00046753 /* UNContentViewController.swift in Sources */,
+				0C13E96122573B8A00346A2D /* UNBottomColorViewController.swift in Sources */,
 				0C51B80A22490C7E00046753 /* UIColor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

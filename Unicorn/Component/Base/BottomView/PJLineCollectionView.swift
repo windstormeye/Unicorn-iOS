@@ -13,8 +13,9 @@ class PJLineCollectionView: UICollectionView {
     
     var viewDelegate: PJLineCollectionViewDelegate?
     var viewModels: [String]? {didSet{ reloadData()}}
+    var viewColorModels: [UIColor]? {didSet{ reloadData()}}
     var cellCenterXs = [CGFloat]()
-    
+    var lineType: LineType = .text
     var cellSelected: ((Int) -> Void)?
     
     override init(frame: CGRect,
@@ -29,7 +30,6 @@ class PJLineCollectionView: UICollectionView {
     }
     
     private func initView() {
-        backgroundColor = .darkGray
         showsHorizontalScrollIndicator = false
         isPagingEnabled = true
         
@@ -51,16 +51,36 @@ extension PJLineCollectionView: UICollectionViewDelegate {
 extension PJLineCollectionView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView,
                         numberOfItemsInSection section: Int) -> Int {
-        guard let viewModels = viewModels else { return 0 }
-        return viewModels.count
+        switch lineType {
+        case .text:
+            guard let viewModels = viewModels else { return 0 }
+            return viewModels.count
+        case .color:
+            guard let viewColorModels = viewColorModels else { return 0 }
+            return viewColorModels.count
+        }
+        
     }
     
     func collectionView(_ collectionView: UICollectionView,
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PJLineCollectionViewCell", for: indexPath) as! PJLineCollectionViewCell
-        cell.viewModel = viewModels![indexPath.row]
+        cell.type = lineType
+        if viewModels != nil {
+            cell.viewModel = viewModels![indexPath.row]
+        }
+        if viewColorModels != nil {
+            cell.viewColorModel = viewColorModels![indexPath.row]
+        }
         cellCenterXs.append(cell.center.x)
         return cell
+    }
+}
+
+extension PJLineCollectionView {
+    enum LineType {
+        case text
+        case color
     }
 }
 
