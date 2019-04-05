@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0C13E94F2256E9F000346A2D /* UNBottomSizeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C13E94D2256E9F000346A2D /* UNBottomSizeViewController.swift */; };
+		0C13E9502256E9F000346A2D /* UNBottomSizeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0C13E94E2256E9F000346A2D /* UNBottomSizeViewController.xib */; };
 		0C51B80822490B1800046753 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C51B80722490B1800046753 /* UIView.swift */; };
 		0C51B80A22490C7E00046753 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C51B80922490C7E00046753 /* UIColor.swift */; };
 		0C51B80C22490FA600046753 /* UNSticerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C51B80B22490FA600046753 /* UNSticerView.swift */; };
@@ -32,6 +34,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0C13E94D2256E9F000346A2D /* UNBottomSizeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UNBottomSizeViewController.swift; sourceTree = "<group>"; };
+		0C13E94E2256E9F000346A2D /* UNBottomSizeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UNBottomSizeViewController.xib; sourceTree = "<group>"; };
 		0C51B80722490B1800046753 /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		0C51B80922490C7E00046753 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		0C51B80B22490FA600046753 /* UNSticerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UNSticerView.swift; sourceTree = "<group>"; };
@@ -69,10 +73,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0C13E94C2256E97800346A2D /* Size */ = {
+			isa = PBXGroup;
+			children = (
+				0C13E94D2256E9F000346A2D /* UNBottomSizeViewController.swift */,
+				0C13E94E2256E9F000346A2D /* UNBottomSizeViewController.xib */,
+			);
+			path = Size;
+			sourceTree = "<group>";
+		};
 		0C3814AC2253A72E0055E56A /* Text */ = {
 			isa = PBXGroup;
 			children = (
 				0C784A442253B4D500D1025A /* UNTextViewController.swift */,
+				0C13E94C2256E97800346A2D /* Size */,
 				0C784A5E225649F000D1025A /* Font */,
 			);
 			path = Text;
@@ -258,6 +272,7 @@
 				0C784A6D225651C000D1025A /* FZZJ-FOJW.TTF in Resources */,
 				0C784A6C225651BD00D1025A /* FZQingFSJW_Cu.TTF in Resources */,
 				0C784A6E225651C100D1025A /* FZZJ-HTKSJW.TTF in Resources */,
+				0C13E9502256E9F000346A2D /* UNBottomSizeViewController.xib in Resources */,
 				0C784A6F225651C300D1025A /* FZZJ-MSMLJW.TTF in Resources */,
 				0C784A70225651C600D1025A /* FZZJ-ZJJYBKTJW.TTF in Resources */,
 				0C784A6A22564B2800D1025A /* UNBottomFontsTableViewController.storyboard in Resources */,
@@ -282,6 +297,7 @@
 				0CDB64852247CE2900ED48D0 /* UNHomeViewController.swift in Sources */,
 				0C784A452253B4D500D1025A /* UNTextViewController.swift in Sources */,
 				0C784A4F2255A69900D1025A /* PJLineCollectionViewCell.swift in Sources */,
+				0C13E94F2256E9F000346A2D /* UNBottomSizeViewController.swift in Sources */,
 				0CDB64732247CDB600ED48D0 /* AppDelegate.swift in Sources */,
 				0C51B80F2249169B00046753 /* UNContentViewController.swift in Sources */,
 				0C51B80A22490C7E00046753 /* UIColor.swift in Sources */,
