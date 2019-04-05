@@ -27,7 +27,7 @@
 import UIKit
 
 // The view to edit HSB color components.
-public class EFHSBView: UIView, EFColorView, UITextFieldDelegate {
+class EFHSBView: UIView {
     
     let EFColorSampleViewHeight: CGFloat = 30.0
     let EFViewMargin: CGFloat = 10.0
@@ -36,22 +36,11 @@ public class EFHSBView: UIView, EFColorView, UITextFieldDelegate {
     private let colorWheel: EFColorWheelView = EFColorWheelView()
     let brightnessView: EFColorComponentView = EFColorComponentView()
     
+    /// 白色
     private var colorComponents: HSB = HSB(1, 1, 1, 1)
     private var layoutConstraints: [NSLayoutConstraint] = []
     
-    weak public var delegate: EFColorViewDelegate?
-    
-    public var isTouched: Bool {
-        if self.colorWheel.isTouched {
-            return true
-        }
-        
-        if self.brightnessView.isTouched {
-            return true
-        }
-        
-        return false
-    }
+    weak var delegate: EFHSBViewDelegate?
     
     public var color: UIColor {
         get {
@@ -73,9 +62,8 @@ public class EFHSBView: UIView, EFColorView, UITextFieldDelegate {
         self.ef_baseInit()
     }
     
-    required public init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        self.ef_baseInit()
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     func reloadData() {
@@ -90,8 +78,7 @@ public class EFHSBView: UIView, EFColorView, UITextFieldDelegate {
     
     // MARK:- Private methods
     private func ef_baseInit() {
-        self.accessibilityLabel = "hsb_view"
-        
+        // 使用约束布局时要设置为 false，取消 frame 布局自动转化为约束布局
         colorWheel.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(colorWheel)
         
@@ -238,4 +225,15 @@ public class EFHSBView: UIView, EFColorView, UITextFieldDelegate {
         self.delegate?.colorView(self, didChangeColor: self.color)
         self.reloadData()
     }
+}
+
+
+protocol EFHSBViewDelegate: class {
+    func colorView(_ colorView: EFHSBView,
+                   didChangeColor color: UIColor)
+}
+
+extension EFHSBViewDelegate {
+    func colorView(_ colorView: EFHSBView,
+                   didChangeColor color: UIColor) {}
 }

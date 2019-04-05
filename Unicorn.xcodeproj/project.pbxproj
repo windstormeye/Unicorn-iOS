@@ -10,7 +10,6 @@
 		0C13E94F2256E9F000346A2D /* UNBottomSizeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C13E94D2256E9F000346A2D /* UNBottomSizeViewController.swift */; };
 		0C13E9502256E9F000346A2D /* UNBottomSizeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0C13E94E2256E9F000346A2D /* UNBottomSizeViewController.xib */; };
 		0C13E95322571CB500346A2D /* EFHSBView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C13E95222571CB500346A2D /* EFHSBView.swift */; };
-		0C13E95522572B0000346A2D /* EFColorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C13E95422572B0000346A2D /* EFColorView.swift */; };
 		0C13E95722572B2400346A2D /* EFColorWheelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C13E95622572B2400346A2D /* EFColorWheelView.swift */; };
 		0C13E95922572B2F00346A2D /* EFColorComponentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C13E95822572B2F00346A2D /* EFColorComponentView.swift */; };
 		0C13E95B22572B4A00346A2D /* EFSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C13E95A22572B4A00346A2D /* EFSliderView.swift */; };
@@ -45,7 +44,6 @@
 		0C13E94D2256E9F000346A2D /* UNBottomSizeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UNBottomSizeViewController.swift; sourceTree = "<group>"; };
 		0C13E94E2256E9F000346A2D /* UNBottomSizeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UNBottomSizeViewController.xib; sourceTree = "<group>"; };
 		0C13E95222571CB500346A2D /* EFHSBView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EFHSBView.swift; sourceTree = "<group>"; };
-		0C13E95422572B0000346A2D /* EFColorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EFColorView.swift; sourceTree = "<group>"; };
 		0C13E95622572B2400346A2D /* EFColorWheelView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EFColorWheelView.swift; sourceTree = "<group>"; };
 		0C13E95822572B2F00346A2D /* EFColorComponentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EFColorComponentView.swift; sourceTree = "<group>"; };
 		0C13E95A22572B4A00346A2D /* EFSliderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EFSliderView.swift; sourceTree = "<group>"; };
@@ -106,7 +104,6 @@
 				0C13E95E22572B8A00346A2D /* EFControl.swift */,
 				0C13E95622572B2400346A2D /* EFColorWheelView.swift */,
 				0C13E95C22572B6100346A2D /* EFThumbView.swift */,
-				0C13E95422572B0000346A2D /* EFColorView.swift */,
 				0C13E95222571CB500346A2D /* EFHSBView.swift */,
 				0C13E96022573B8A00346A2D /* UNBottomColorViewController.swift */,
 			);
@@ -323,7 +320,6 @@
 				0C784A522255A6AE00D1025A /* PJLineCollectionView.swift in Sources */,
 				0C13E95F22572B8A00346A2D /* EFControl.swift in Sources */,
 				0C13E95D22572B6100346A2D /* EFThumbView.swift in Sources */,
-				0C13E95522572B0000346A2D /* EFColorView.swift in Sources */,
 				0C51B80822490B1800046753 /* UIView.swift in Sources */,
 				0C784A6522564A4F00D1025A /* UNBottomFontsTableViewController.swift in Sources */,
 				0C784A472253B8D700D1025A /* Define.swift in Sources */,

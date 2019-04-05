@@ -157,6 +157,7 @@ class UNTextViewController: UIViewController {
         get {
             let colorPopover = UNBottomColorViewController()
             colorPopover.colors = itemColors
+            colorPopover.currentColor = self.textView.textColor
             colorPopover.preferredContentSize = CGSize(width: 200, height: 280)
             colorPopover.modalPresentationStyle = .popover
             

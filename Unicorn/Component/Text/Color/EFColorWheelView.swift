@@ -27,12 +27,9 @@
 import UIKit
 import CoreGraphics
 
-// The color wheel view.
-public class EFColorWheelView: UIControl {
-    
-    var isTouched = false
 
-    // The hue value.
+public class EFColorWheelView: UIControl {
+    /// 色相
     var hue: CGFloat = 0.0 {
         didSet {
             self.setSelectedPoint(point: ef_selectedPoint())
@@ -40,7 +37,7 @@ public class EFColorWheelView: UIControl {
         }
     }
 
-    // The saturation value.
+    /// 饱和度
     var saturation: CGFloat = 0.0 {
         didSet {
             self.setSelectedPoint(point: ef_selectedPoint())
@@ -48,7 +45,7 @@ public class EFColorWheelView: UIControl {
         }
     }
 
-    // The saturation value.
+    /// 亮度
     var brightness: CGFloat = 1.0 {
         didSet {
             self.setSelectedPoint(point: ef_selectedPoint())
@@ -56,6 +53,7 @@ public class EFColorWheelView: UIControl {
         }
     }
 
+    /// 指示圈
     private lazy var indicatorLayer: CALayer = {
         let dimension: CGFloat = 33
         let edgeColor = UIColor(white: 0.9, alpha: 0.8)
@@ -74,6 +72,7 @@ public class EFColorWheelView: UIControl {
         return indicatorLayer
     }()
 
+    // 基于约束的布局是懒加载的，只有在添加约束的情况下才会触发 `updateConstraints` 方法，但如果把所有约束布局代码写在其中，则系统并不知道是否是基于约束的布局，使用该方法强行告诉系统进行调用
     override open class var requiresConstraintBasedLayout: Bool {
         get {
             return true
@@ -83,12 +82,8 @@ public class EFColorWheelView: UIControl {
     override init(frame: CGRect) {
         super.init(frame: frame)
 
-        self.accessibilityLabel = "color_wheel_view"
-
         self.layer.delegate = self
         self.layer.addSublayer(self.indicatorLayer)
-
-//         [self setSelectedPoint:CGPointMake(dimension / 2, dimension / 2)];
     }
 
     required public init?(coder aDecoder: NSCoder) {
@@ -96,7 +91,6 @@ public class EFColorWheelView: UIControl {
     }
 
     override public func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.isTouched = true
         if let position: CGPoint = touches.first?.location(in: self) {
             self.onTouchEventWithPosition(point: position)
         }
@@ -109,13 +103,12 @@ public class EFColorWheelView: UIControl {
     }
 
     override public func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.isTouched = false
         if let position: CGPoint = touches.first?.location(in: self) {
             self.onTouchEventWithPosition(point: position)
         }
     }
 
-    func onTouchEventWithPosition(point: CGPoint) {
+    private func onTouchEventWithPosition(point: CGPoint) {
         let radius: CGFloat = self.bounds.width / 2
 
         let mx = Double(radius - point.x)
@@ -145,7 +138,8 @@ public class EFColorWheelView: UIControl {
         guard let bitmapData = CFDataCreateMutable(nil, 0) else {
             return
         }
-
+        
+        // 造了一个位图，按像素进行颜色填充
         CFDataSetLength(bitmapData, CFIndex(dimension * dimension * 4))
         self.ef_colorWheelBitmap(
             bitmap: CFDataGetMutableBytePtr(bitmapData),
@@ -179,6 +173,7 @@ public class EFColorWheelView: UIControl {
             return
         }
 
+        // 填充每一个像素的内容
         for y in 0 ..< Int(size.width) {
             for x in 0 ..< Int(size.height) {
                 var hue: CGFloat = 0, saturation: CGFloat = 0, a: CGFloat = 0.0
@@ -197,6 +192,7 @@ public class EFColorWheelView: UIControl {
                     rgb = EFHSB2RGB(hsb: hsb)
                 }
 
+                // RGBA 四通道
                 let i: Int = 4 * (x + y * Int(size.width))
                 bitmap?[i] = UInt8(rgb.red * 0xff)
                 bitmap?[i + 1] = UInt8(rgb.green * 0xff)

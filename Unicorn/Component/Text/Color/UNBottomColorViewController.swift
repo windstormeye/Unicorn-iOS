@@ -9,8 +9,13 @@
 import UIKit
 
 class UNBottomColorViewController: UIViewController {
-    var colors: [UIColor]? {didSet{colorCollectionView?.viewColorModels = colors}}
+    var colors: [UIColor]? {
+        didSet {
+            colorCollectionView?.viewColorModels = colors
+        }
+    }
     var colorChange: ((UIColor) -> Void)?
+    var currentColor: UIColor?
     
     private var colorCollectionView: PJLineCollectionView?
     
@@ -21,6 +26,9 @@ class UNBottomColorViewController: UIViewController {
     
     private func initView() {
         let colorView = EFHSBView(frame: CGRect(x: 0, y: 0, width: 200, height: 250))
+        if currentColor != nil {
+            colorView.color = currentColor!
+        }
         colorView.delegate = self
         view.addSubview(colorView)
         
@@ -46,8 +54,8 @@ class UNBottomColorViewController: UIViewController {
     }
 }
 
-extension UNBottomColorViewController: EFColorViewDelegate {
-    func colorView(_ colorView: EFColorView, didChangeColor color: UIColor) {
+extension UNBottomColorViewController: EFHSBViewDelegate {
+    func colorView(_ colorView: EFHSBView, didChangeColor color: UIColor) {
         colorChange?(color)
     }
 }
