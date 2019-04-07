@@ -9,7 +9,9 @@
 import UIKit
 
 class UNTextViewController: UIViewController {
-
+    var complateHandler: ((UNSticerView.TextStickerViewModel) -> Void)?
+    var textViewHeight: CGFloat?
+    
     private var textView = UITextView()
     private var bottomCollectionView: PJLineCollectionView?
     private var itemImageNames = ["字体", "大小", "颜色"]
@@ -22,6 +24,8 @@ class UNTextViewController: UIViewController {
                              "FZZJ-ZJJYBKTJW"]
     
     private let topViewBottom = topSafeAreaHeight + 10 + 30
+    private var viewModel: UNSticerView.TextStickerViewModel?
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,6 +33,8 @@ class UNTextViewController: UIViewController {
     }
     
     private func initView() {
+        view.backgroundColor = .clear
+        
         let backButton = UIButton(frame: CGRect(x: 15, y: statusBarHeight + 10, width: 30, height: 30))
         view.addSubview(backButton)
         backButton.titleLabel?.font = UIFont.systemFont(ofSize: 25)
@@ -38,6 +44,7 @@ class UNTextViewController: UIViewController {
         view.addSubview(doneButton)
         doneButton.titleLabel?.font = backButton.titleLabel?.font
         doneButton.setTitle("✓", for: .normal)
+        doneButton.addTarget(self, action: .done, for: .touchUpInside)
         
         
         textView.frame = CGRect(x: 15, y: backButton.bottom + 10, width: view.width - 30, height: 300)
@@ -101,8 +108,12 @@ class UNTextViewController: UIViewController {
         }
     }
     
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
+    @objc
+    fileprivate func doneButtonClick() {
+        let viewModel = UNSticerView.TextStickerViewModel(text: textView.text!, textColor: textView.textColor!, textFont: textView.font!)
+        textViewHeight = heightForString(textView: textView, textWidth: textView.width)
+        complateHandler?(viewModel)
+        dismiss(animated: true, completion: nil)
     }
     
     /// 字体
@@ -175,10 +186,15 @@ class UNTextViewController: UIViewController {
             return colorPopover
         }
     }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
 }
 
 private extension Selector {
     static let keyboardFrame = #selector(UNTextViewController.keyBoardFrameChange(_:))
+    static let done = #selector(UNTextViewController.doneButtonClick)
 }
 
 extension UNTextViewController: UIPopoverPresentationControllerDelegate {

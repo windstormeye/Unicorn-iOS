@@ -87,6 +87,37 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0C0C927E22599ED20014909B /* ColorPicker */ = {
+			isa = PBXGroup;
+			children = (
+				0C13E95A22572B4A00346A2D /* EFSliderView.swift */,
+				0C13E95822572B2F00346A2D /* EFColorComponentView.swift */,
+				0C13E95E22572B8A00346A2D /* EFControl.swift */,
+				0C13E95622572B2400346A2D /* EFColorWheelView.swift */,
+				0C13E95C22572B6100346A2D /* EFThumbView.swift */,
+				0C13E95222571CB500346A2D /* EFHSBView.swift */,
+			);
+			path = ColorPicker;
+			sourceTree = "<group>";
+		};
+		0C0C927F22599EF40014909B /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				0C784A442253B4D500D1025A /* UNTextViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		0C0C928022599EFF0014909B /* Component */ = {
+			isa = PBXGroup;
+			children = (
+				0C13E95122571CAC00346A2D /* Color */,
+				0C13E94C2256E97800346A2D /* Size */,
+				0C784A5E225649F000D1025A /* Font */,
+			);
+			path = Component;
+			sourceTree = "<group>";
+		};
 		0C13E94C2256E97800346A2D /* Size */ = {
 			isa = PBXGroup;
 			children = (
@@ -99,12 +130,7 @@
 		0C13E95122571CAC00346A2D /* Color */ = {
 			isa = PBXGroup;
 			children = (
-				0C13E95A22572B4A00346A2D /* EFSliderView.swift */,
-				0C13E95822572B2F00346A2D /* EFColorComponentView.swift */,
-				0C13E95E22572B8A00346A2D /* EFControl.swift */,
-				0C13E95622572B2400346A2D /* EFColorWheelView.swift */,
-				0C13E95C22572B6100346A2D /* EFThumbView.swift */,
-				0C13E95222571CB500346A2D /* EFHSBView.swift */,
+				0C0C927E22599ED20014909B /* ColorPicker */,
 				0C13E96022573B8A00346A2D /* UNBottomColorViewController.swift */,
 			);
 			path = Color;
@@ -113,10 +139,8 @@
 		0C3814AC2253A72E0055E56A /* Text */ = {
 			isa = PBXGroup;
 			children = (
-				0C784A442253B4D500D1025A /* UNTextViewController.swift */,
-				0C13E95122571CAC00346A2D /* Color */,
-				0C13E94C2256E97800346A2D /* Size */,
-				0C784A5E225649F000D1025A /* Font */,
+				0C0C927F22599EF40014909B /* ViewController */,
+				0C0C928022599EFF0014909B /* Component */,
 			);
 			path = Text;
 			sourceTree = "<group>";
@@ -231,8 +255,8 @@
 		0CDB64882249058C00ED48D0 /* Component */ = {
 			isa = PBXGroup;
 			children = (
-				0C3814AC2253A72E0055E56A /* Text */,
 				0C51B80D2249168500046753 /* Base */,
+				0C3814AC2253A72E0055E56A /* Text */,
 				0CDB64872249054C00ED48D0 /* Sticker */,
 			);
 			path = Component;

@@ -44,6 +44,18 @@ class UNTouchView: UIView {
         closeButton.layer.cornerRadius = 12
         closeButton.layer.masksToBounds = true
         closeButton.isHidden = true
+        
+        let pinchGesture = UIPinchGestureRecognizer(target: self, action: .pinch)
+        pinchGesture.delegate = self
+        addGestureRecognizer(pinchGesture)
+        
+        let rotateGesture = UIRotationGestureRecognizer(target: self, action: .rotate)
+        rotateGesture.delegate = self
+        addGestureRecognizer(rotateGesture)
+        
+        let panGesture = UIPanGestureRecognizer(target: self, action: .pan)
+        panGesture.delegate = self
+        addGestureRecognizer(panGesture)
     }
     
     private func initLayout() {
@@ -60,12 +72,45 @@ class UNTouchView: UIView {
             removeFromSuperview()
         }
     }
+    
+    @objc
+    fileprivate func pinchImage(gesture: UIPinchGestureRecognizer) {
+        if gesture.state == .changed {
+            transform = transform.scaledBy(x: gesture.scale, y: gesture.scale)
+            gesture.scale = 1
+        }
+    }
+    
+    @objc
+    fileprivate func rotateImage(gesture: UIRotationGestureRecognizer) {
+        if gesture.state == .changed {
+            transform = transform.rotated(by: gesture.rotation)
+            gesture.rotation = 0
+        }
+    }
+    
+    @objc
+    fileprivate func panImage(gesture: UIPanGestureRecognizer) {
+        if gesture.state == .changed {
+            let gesturePosition = gesture.translation(in: superview)
+            center = CGPoint(x: center.x + gesturePosition.x, y: center.y + gesturePosition.y)
+            gesture.setTranslation(.zero, in: superview)
+        }
+    }
 }
 
 private extension Selector {
     static let close = #selector(UNTouchView.closeButtonClick)
+    static let pinch = #selector(UNSticerView.pinchImage(gesture:))
+    static let rotate = #selector(UNSticerView.rotateImage(gesture:))
+    static let pan = #selector(UNSticerView.panImage(gesture:))
 }
 
+extension UNTouchView: UIGestureRecognizerDelegate {
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
+    }
+}
 
 protocol UNTouchViewProtocol {
     func UNTouchViewCloseButtonClick()
@@ -74,3 +119,4 @@ protocol UNTouchViewProtocol {
 private extension UNTouchViewProtocol {
     func UNTouchViewCloseButtonClick() {}
 }
+

@@ -23,7 +23,22 @@ class UNContentViewController: UIViewController {
         let stickerWow = UNSticerView(frame: CGRect(x: 100, y: 100, width: 100, height: 100))
         view.addSubview(stickerWow)
         stickerViews.append(stickerWow)
-        stickerWow.stickerImage = UIImage(named: "sticker_wow")
+        stickerWow.imgViewModel = UNSticerView.ImageStickerViewModel(image: UIImage(named: "sticker_wow")!)
+        
+        let pan = UITapGestureRecognizer(target: self, action: #selector(panp))
+        
+        stickerWow.addGestureRecognizer(pan)
+    }
+    
+    @objc func panp() {
+        let tvc = UNTextViewController()
+        present(tvc, animated: true, completion: nil)
+        tvc.complateHandler = { viewModel in
+            let textStickerView = UNSticerView(frame: CGRect(x: 20, y: 20, width: self.view.width - 30, height: tvc.textViewHeight!))
+            self.view.addSubview(textStickerView)
+            self.stickerViews.append(textStickerView)
+            textStickerView.textViewModel = viewModel
+        }
     }
 }
 
