@@ -33,17 +33,21 @@ class UNTextViewController: UIViewController {
     }
     
     private func initView() {
-        view.backgroundColor = .clear
+        view.backgroundColor = UIColor(red: 1, green: 240/255, blue: 209/255, alpha: 1)
         
         let backButton = UIButton(frame: CGRect(x: 15, y: statusBarHeight + 10, width: 30, height: 30))
         view.addSubview(backButton)
+        backButton.setTitleColor(.darkGray, for: .normal)
         backButton.titleLabel?.font = UIFont.systemFont(ofSize: 25)
         backButton.setTitle("←", for: .normal)
+        backButton.addTarget(self, action: .back, for: .touchUpInside)
+
         
         let doneButton = UIButton(frame: CGRect(x: screenWidth - 30 - 15, y: backButton.top, width: backButton.width, height: backButton.height))
         view.addSubview(doneButton)
         doneButton.titleLabel?.font = backButton.titleLabel?.font
         doneButton.setTitle("✓", for: .normal)
+        doneButton.setTitleColor(.darkGray, for: .normal)
         doneButton.addTarget(self, action: .done, for: .touchUpInside)
         
         
@@ -52,8 +56,8 @@ class UNTextViewController: UIViewController {
         textView.textAlignment = .center
         textView.font = UIFont.systemFont(ofSize: 22, weight: .bold)
         textView.becomeFirstResponder()
-        textView.tintColor = .white
-        textView.textColor = .white
+        textView.tintColor = .darkGray
+        textView.textColor = .darkGray
         textView.keyboardAppearance = .dark
         view.addSubview(textView)
 
@@ -113,6 +117,11 @@ class UNTextViewController: UIViewController {
         let viewModel = UNSticerView.TextStickerViewModel(text: textView.text!, textColor: textView.textColor!, textFont: textView.font!)
         textViewHeight = heightForString(textView: textView, textWidth: textView.width)
         complateHandler?(viewModel)
+        dismiss(animated: true, completion: nil)
+    }
+    
+    @objc
+    fileprivate func backButtonClick() {
         dismiss(animated: true, completion: nil)
     }
     
@@ -194,6 +203,7 @@ class UNTextViewController: UIViewController {
 
 private extension Selector {
     static let keyboardFrame = #selector(UNTextViewController.keyBoardFrameChange(_:))
+    static let back = #selector(UNTextViewController.backButtonClick)
     static let done = #selector(UNTextViewController.doneButtonClick)
 }
 

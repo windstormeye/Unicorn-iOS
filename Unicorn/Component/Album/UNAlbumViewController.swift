@@ -25,6 +25,8 @@ class UNAlbumViewController: UIViewController {
     }
     
     private func initView() {
+        view.backgroundColor = .clear
+        
         let backButton = UIButton(frame: CGRect(x: 15, y: statusBarHeight + 10, width: 30, height: 30))
         view.addSubview(backButton)
         backButton.titleLabel?.font = UIFont.systemFont(ofSize: 25)

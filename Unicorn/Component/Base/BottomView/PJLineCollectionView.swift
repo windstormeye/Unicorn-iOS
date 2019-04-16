@@ -58,6 +58,8 @@ extension PJLineCollectionView: UICollectionViewDataSource {
         case .color:
             guard let viewColorModels = viewColorModels else { return 0 }
             return viewColorModels.count
+        case .icon:
+            return 4
         }
         
     }
@@ -66,13 +68,17 @@ extension PJLineCollectionView: UICollectionViewDataSource {
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PJLineCollectionViewCell", for: indexPath) as! PJLineCollectionViewCell
         cell.type = lineType
-        if viewModels != nil {
+        
+        switch lineType {
+        case .text:
             cell.viewModel = viewModels![indexPath.row]
-        }
-        if viewColorModels != nil {
+        case .color:
             cell.viewColorModel = viewColorModels![indexPath.row]
+        case .icon:
+            cell.image = UIImage(named: "home-\(indexPath.row)")
         }
         cellCenterXs.append(cell.center.x)
+        
         return cell
     }
 }
@@ -81,6 +87,7 @@ extension PJLineCollectionView {
     enum LineType {
         case text
         case color
+        case icon
     }
 }
 
