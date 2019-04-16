@@ -11,8 +11,10 @@ import UIKit
 class UNBottomSizeViewController: UIViewController {
 
     var size: CGFloat?
+    var maxSize: CGFloat?
+    var minSize: CGFloat?
     
-    @IBOutlet private weak var sizeSlider: UISlider!
+    @IBOutlet weak var sizeSlider: UISlider!
     @IBOutlet private weak var sizeLabel: UILabel!
     
     var sizeChange: ((CGFloat) -> Void)?
@@ -23,7 +25,7 @@ class UNBottomSizeViewController: UIViewController {
     }
     
     @IBAction func sizeSliderTouching(_ sender: UISlider) {
-        sizeLabel.text = "字体大小：\(Int(sender.value))"
+        sizeLabel.text = "大小：\(Int(sender.value))"
         sizeChange?(CGFloat(ceilf(sender.value)))
     }
     
@@ -31,8 +33,17 @@ class UNBottomSizeViewController: UIViewController {
         let v = Bundle.main.loadNibNamed("UNBottomSizeViewController", owner: self, options: nil)?.first as! UIView
         v.frame = view.frame
         
-        guard size != nil else { return }
-        sizeLabel.text = "字体大小：\(Int(size!))"
-        sizeSlider.value = Float(size!)
+        if maxSize != nil {
+            sizeSlider.maximumValue = Float(maxSize!)
+        }
+        
+        if minSize != nil {
+            sizeSlider.minimumValue = Float(minSize!)
+        }
+        
+        if size != nil {
+            sizeLabel.text = "大小：\(Int(size!))"
+            sizeSlider.value = Float(size!)
+        }
     }
 }

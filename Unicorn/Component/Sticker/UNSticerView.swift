@@ -21,6 +21,7 @@ class UNSticerView: UNTouchView {
         let imageStickerView = UIImageView(frame: CGRect(x: 0, y: 0, width: width, height: height))
         imageStickerView.layer.borderColor = UIColor.white.cgColor
         imageStickerView.contentMode = .scaleAspectFit
+        imageStickerView.layer.masksToBounds = true
         addSubview(imageStickerView)
         return imageStickerView
     }()
@@ -57,7 +58,7 @@ extension UNSticerView {
     }
 }
 
-// MARK:-
+
 class UNLabel: UILabel {
     var viewModel: UNSticerView.TextStickerViewModel? {
         didSet {

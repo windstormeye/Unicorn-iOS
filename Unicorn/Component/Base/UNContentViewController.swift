@@ -26,8 +26,20 @@ class UNContentViewController: UIViewController {
         stickerWow.imgViewModel = UNSticerView.ImageStickerViewModel(image: UIImage(named: "sticker_wow")!)
         
         let pan = UITapGestureRecognizer(target: self, action: #selector(panp))
-        
         stickerWow.addGestureRecognizer(pan)
+        
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) {
+            let vc = UNAlbumViewController()
+            self.present(vc, animated: true, completion: nil)
+            
+            vc.imageSelected = {
+                let width = CGFloat(100)
+                let stickerWow = UNSticerView(frame: CGRect(x: 100, y: 100, width: width, height: width / $0))
+                self.view.addSubview(stickerWow)
+                self.stickerViews.append(stickerWow)
+                stickerWow.imgViewModel = UNSticerView.ImageStickerViewModel(image: $1)
+            }
+        }
     }
     
     @objc func panp() {

@@ -33,6 +33,7 @@
 		0C784A6F225651C300D1025A /* FZZJ-MSMLJW.TTF in Resources */ = {isa = PBXBuildFile; fileRef = 0C784A5822563A9800D1025A /* FZZJ-MSMLJW.TTF */; };
 		0C784A70225651C600D1025A /* FZZJ-ZJJYBKTJW.TTF in Resources */ = {isa = PBXBuildFile; fileRef = 0C784A5A22563A9800D1025A /* FZZJ-ZJJYBKTJW.TTF */; };
 		0C784A71225652E400D1025A /* FZLuXTJW.TTF in Resources */ = {isa = PBXBuildFile; fileRef = 0C784A5C22563A9900D1025A /* FZLuXTJW.TTF */; };
+		0CB5E8FE2265EB2400CBE217 /* UNAlbumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CB5E8FD2265EB2400CBE217 /* UNAlbumViewController.swift */; };
 		0CDB64732247CDB600ED48D0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CDB64722247CDB600ED48D0 /* AppDelegate.swift */; };
 		0CDB647A2247CDB700ED48D0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0CDB64792247CDB700ED48D0 /* Assets.xcassets */; };
 		0CDB647D2247CDB700ED48D0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0CDB647B2247CDB700ED48D0 /* LaunchScreen.storyboard */; };
@@ -67,6 +68,7 @@
 		0C784A5D22563A9900D1025A /* FZZJ-FOJW.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FZZJ-FOJW.TTF"; sourceTree = "<group>"; };
 		0C784A6322564A4F00D1025A /* UNBottomFontsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UNBottomFontsTableViewController.swift; sourceTree = "<group>"; };
 		0C784A6922564B2800D1025A /* UNBottomFontsTableViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = UNBottomFontsTableViewController.storyboard; sourceTree = "<group>"; };
+		0CB5E8FD2265EB2400CBE217 /* UNAlbumViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UNAlbumViewController.swift; sourceTree = "<group>"; };
 		0CDB646F2247CDB600ED48D0 /* Unicorn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Unicorn.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0CDB64722247CDB600ED48D0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0CDB64792247CDB700ED48D0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -204,6 +206,14 @@
 			path = Font;
 			sourceTree = "<group>";
 		};
+		0CB5E8FC2265EB0800CBE217 /* Album */ = {
+			isa = PBXGroup;
+			children = (
+				0CB5E8FD2265EB2400CBE217 /* UNAlbumViewController.swift */,
+			);
+			path = Album;
+			sourceTree = "<group>";
+		};
 		0CDB64662247CDB600ED48D0 = {
 			isa = PBXGroup;
 			children = (
@@ -257,6 +267,7 @@
 			children = (
 				0C51B80D2249168500046753 /* Base */,
 				0C3814AC2253A72E0055E56A /* Text */,
+				0CB5E8FC2265EB0800CBE217 /* Album */,
 				0CDB64872249054C00ED48D0 /* Sticker */,
 			);
 			path = Component;
@@ -343,6 +354,7 @@
 				0C13E95722572B2400346A2D /* EFColorWheelView.swift in Sources */,
 				0C784A522255A6AE00D1025A /* PJLineCollectionView.swift in Sources */,
 				0C13E95F22572B8A00346A2D /* EFControl.swift in Sources */,
+				0CB5E8FE2265EB2400CBE217 /* UNAlbumViewController.swift in Sources */,
 				0C13E95D22572B6100346A2D /* EFThumbView.swift in Sources */,
 				0C51B80822490B1800046753 /* UIView.swift in Sources */,
 				0C784A6522564A4F00D1025A /* UNBottomFontsTableViewController.swift in Sources */,
@@ -507,7 +519,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.pjhubs.Unicorn;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -525,7 +537,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.pjhubs.Unicorn;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
