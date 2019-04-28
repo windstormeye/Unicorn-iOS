@@ -20,6 +20,8 @@
 		0C51B80A22490C7E00046753 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C51B80922490C7E00046753 /* UIColor.swift */; };
 		0C51B80C22490FA600046753 /* UNSticerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C51B80B22490FA600046753 /* UNSticerView.swift */; };
 		0C51B80F2249169B00046753 /* UNContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C51B80E2249169B00046753 /* UNContentViewController.swift */; };
+		0C6A987922756D72003E4AA5 /* UNBrushView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C6A987822756D72003E4AA5 /* UNBrushView.swift */; };
+		0C6A987B22756E81003E4AA5 /* UNCanvaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C6A987A22756E81003E4AA5 /* UNCanvaView.swift */; };
 		0C784A452253B4D500D1025A /* UNTextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C784A442253B4D500D1025A /* UNTextViewController.swift */; };
 		0C784A472253B8D700D1025A /* Define.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C784A462253B8D700D1025A /* Define.swift */; };
 		0C784A4F2255A69900D1025A /* PJLineCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C784A4D2255A69900D1025A /* PJLineCollectionViewCell.swift */; };
@@ -55,6 +57,8 @@
 		0C51B80922490C7E00046753 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		0C51B80B22490FA600046753 /* UNSticerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UNSticerView.swift; sourceTree = "<group>"; };
 		0C51B80E2249169B00046753 /* UNContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UNContentViewController.swift; sourceTree = "<group>"; };
+		0C6A987822756D72003E4AA5 /* UNBrushView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UNBrushView.swift; sourceTree = "<group>"; };
+		0C6A987A22756E81003E4AA5 /* UNCanvaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UNCanvaView.swift; sourceTree = "<group>"; };
 		0C784A442253B4D500D1025A /* UNTextViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UNTextViewController.swift; sourceTree = "<group>"; };
 		0C784A462253B8D700D1025A /* Define.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Define.swift; sourceTree = "<group>"; };
 		0C784A4D2255A69900D1025A /* PJLineCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PJLineCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -166,6 +170,15 @@
 			path = Base;
 			sourceTree = "<group>";
 		};
+		0C6A987722756D4C003E4AA5 /* Brush */ = {
+			isa = PBXGroup;
+			children = (
+				0C6A987822756D72003E4AA5 /* UNBrushView.swift */,
+				0C6A987A22756E81003E4AA5 /* UNCanvaView.swift */,
+			);
+			path = Brush;
+			sourceTree = "<group>";
+		};
 		0C784A482253B8E500D1025A /* Config */ = {
 			isa = PBXGroup;
 			children = (
@@ -266,6 +279,7 @@
 			isa = PBXGroup;
 			children = (
 				0C51B80D2249168500046753 /* Base */,
+				0C6A987722756D4C003E4AA5 /* Brush */,
 				0C3814AC2253A72E0055E56A /* Text */,
 				0CB5E8FC2265EB0800CBE217 /* Album */,
 				0CDB64872249054C00ED48D0 /* Sticker */,
@@ -369,6 +383,8 @@
 				0C784A4F2255A69900D1025A /* PJLineCollectionViewCell.swift in Sources */,
 				0C13E94F2256E9F000346A2D /* UNBottomSizeViewController.swift in Sources */,
 				0CDB64732247CDB600ED48D0 /* AppDelegate.swift in Sources */,
+				0C6A987922756D72003E4AA5 /* UNBrushView.swift in Sources */,
+				0C6A987B22756E81003E4AA5 /* UNCanvaView.swift in Sources */,
 				0C13E95B22572B4A00346A2D /* EFSliderView.swift in Sources */,
 				0C51B80F2249169B00046753 /* UNContentViewController.swift in Sources */,
 				0C13E96122573B8A00346A2D /* UNBottomColorViewController.swift in Sources */,

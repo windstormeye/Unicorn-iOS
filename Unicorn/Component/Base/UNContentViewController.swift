@@ -23,10 +23,14 @@ class UNContentViewController: UIViewController {
     }
     
     private func initView() {
-        view.backgroundColor = .white
+//        view.backgroundColor = .white
+        view.backgroundColor = .black
 
+        let brushView = UNBrushView(frame: CGRect(x: 0, y: 0, width: view.width, height: view.height))
+        view.addSubview(brushView)
+        
         let stickerWow = UNSticerView(frame: CGRect(x: 100, y: 100, width: 100, height: 100))
-        view.addSubview(stickerWow)
+//        view.addSubview(stickerWow)
         stickerViews.append(stickerWow)
         stickerWow.imgViewModel = UNSticerView.ImageStickerViewModel(image: UIImage(named: "sticker_wow")!)
         
@@ -45,7 +49,7 @@ class UNContentViewController: UIViewController {
         collectionView.backgroundColor = UIColor(red: 54/255, green: 149/255, blue: 1, alpha: 1)
         self.bottomCollectionView = collectionView
         collectionView.lineType = .icon
-        view.addSubview(collectionView)
+//        view.addSubview(collectionView)
         
         collectionView.cellSelected = { cellIndex in
             switch cellIndex {
