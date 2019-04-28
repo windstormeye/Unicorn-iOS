@@ -15,13 +15,18 @@ class UNCanvaView: UIView {
     }
     
     /// 设置画笔
-    func brunsh(brush: UNBrushView.UNBrush) {
+    func brunsh(brush: UNBrushView.UNBrush?) {
         let shapeLayer = self.layer as! CAShapeLayer
-        shapeLayer.strokeColor = brush.color.cgColor
         shapeLayer.fillColor = UIColor.clear.cgColor
         shapeLayer.lineJoin = .round
         shapeLayer.lineCap = .round
-        shapeLayer.lineWidth = brush.width
-        shapeLayer.path = brush.bezierPath.cgPath
+        
+        if brush != nil {
+            shapeLayer.lineWidth = brush!.width
+            shapeLayer.strokeColor = brush!.color.cgColor
+            shapeLayer.path = brush!.bezierPath.cgPath
+        } else {
+            shapeLayer.path = nil
+        }
     }
 }

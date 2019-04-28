@@ -24,6 +24,10 @@ class UNBrushView: UIView {
     private var points = Array(repeating: CGPoint(), count: 5)
     /// 标识当前存储的点索引
     private var pointIndex = 0
+    /// 可撤回集合
+    private var redoDatas = [Data]()
+    /// 可重做集合
+    private var undoDatas = [Data]()
     
     
     override init(frame: CGRect) {
@@ -38,6 +42,7 @@ class UNBrushView: UIView {
     private func clean() {
         bgView.image = nil
         brushes.removeAll()
+        redoDatas.removeAll()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -50,6 +55,54 @@ class UNBrushView: UIView {
         
         canvaView.frame = CGRect(x: 0, y: 0, width: width, height: height)
         bgView.addSubview(canvaView)
+        
+        let undoButton = UIButton(frame: CGRect(x: 100, y: 100, width: 100, height: 100))
+        addSubview(undoButton)
+        undoButton.addTarget(self, action: #selector(undo), for: .touchUpInside)
+        undoButton.backgroundColor = .red
+        
+        let redoButton = UIButton(frame: CGRect(x: 100, y: 250, width: 100, height: 100))
+        addSubview(redoButton)
+        redoButton.addTarget(self, action: #selector(redo), for: .touchUpInside)
+        redoButton.backgroundColor = .blue
+    }
+    
+    @objc
+    private func erase() {
+        if brushWidth != 10 {
+            brushColor = .black
+            brushWidth = 10
+        } else {
+            brushColor = .white
+            brushWidth = 3
+        }
+    }
+    
+    @objc
+    private func undo() {
+        guard undoDatas.count != 0 else { return }
+        
+        // 如果是撤回集合中只有 1 个数据，则说明撤回后为空
+        if undoDatas.count == 1 {
+            redoDatas.append(undoDatas.last!)
+            undoDatas.removeLast()
+            bgView.image = nil
+        } else {
+            redoDatas.append(undoDatas.last!)
+            undoDatas.removeLast()
+            bgView.image = nil
+            bgView.image = UIImage(data: undoDatas.last!)
+        }
+    }
+    
+    @objc
+    private func redo() {
+        if redoDatas.count > 0 {
+            // 先赋值，再移除
+            bgView.image = UIImage(data: redoDatas.last!)
+            undoDatas.append(redoDatas.last!)
+            redoDatas.removeLast()
+        }
     }
     
     override func layoutSubviews() {
@@ -61,7 +114,7 @@ class UNBrushView: UIView {
         let beginPoint = touches.first?.location(in: self)
         let bezierPath = UIBezierPath()
         bezierPath.move(to: beginPoint!)
-        let brush = UNBrush(color: .white, width: 3, bezierPath: bezierPath)
+        let brush = UNBrush(color: brushColor, width: brushWidth, bezierPath: bezierPath)
         brushes.append(brush)
         
         pointIndex = 0
@@ -92,7 +145,7 @@ class UNBrushView: UIView {
             points[1] = points[4]
             pointIndex = 1
         }
-        canvaView.brunsh(brush: brush!)
+        canvaView.brunsh(brush: brush)
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -101,7 +154,10 @@ class UNBrushView: UIView {
         bgView.layer.render(in: context!)
         let bgImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
+        
         bgView.image = bgImage
+        undoDatas.append(bgImage!.pngData()!)
+        canvaView.brunsh(brush: nil)
     }
     
     func drawImage() -> UIImage {
