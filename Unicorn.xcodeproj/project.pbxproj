@@ -173,10 +173,18 @@
 		0C6A987722756D4C003E4AA5 /* Brush */ = {
 			isa = PBXGroup;
 			children = (
+				0C6A987C22768712003E4AA5 /* Canva */,
 				0C6A987822756D72003E4AA5 /* UNBrushView.swift */,
-				0C6A987A22756E81003E4AA5 /* UNCanvaView.swift */,
 			);
 			path = Brush;
+			sourceTree = "<group>";
+		};
+		0C6A987C22768712003E4AA5 /* Canva */ = {
+			isa = PBXGroup;
+			children = (
+				0C6A987A22756E81003E4AA5 /* UNCanvaView.swift */,
+			);
+			path = Canva;
 			sourceTree = "<group>";
 		};
 		0C784A482253B8E500D1025A /* Config */ = {

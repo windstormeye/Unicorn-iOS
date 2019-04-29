@@ -10,7 +10,7 @@ import UIKit
 
 class UNBrushView: UIView {
     /// 画笔颜色
-    var brushColor: UIColor = .white
+    var brushColor: UIColor = .black
     /// 画笔宽度
     var brushWidth: CGFloat = 3
     
@@ -28,6 +28,8 @@ class UNBrushView: UIView {
     private var redoDatas = [Data]()
     /// 可重做集合
     private var undoDatas = [Data]()
+    /// 底部功能栏
+    private var bottomView = UIView()
     
     
     override init(frame: CGRect) {
@@ -50,21 +52,49 @@ class UNBrushView: UIView {
     }
     
     private func initView() {
+        bottomView.frame = CGRect(x: 0, y: height - 50, width: width, height: 50)
+        addSubview(bottomView)
+        bottomView.backgroundColor = .lightGray
+        
+        
         bgView.frame = CGRect(x: 0, y: 0, width: width, height: height)
         addSubview(bgView)
         
         canvaView.frame = CGRect(x: 0, y: 0, width: width, height: height)
         bgView.addSubview(canvaView)
         
-        let undoButton = UIButton(frame: CGRect(x: 100, y: 100, width: 100, height: 100))
-        addSubview(undoButton)
+        // 撤回
+        let undoButton = UIButton(frame: CGRect(x: 0, y: 0, width: bottomView.height, height: bottomView.height))
+        bottomView.addSubview(undoButton)
         undoButton.addTarget(self, action: #selector(undo), for: .touchUpInside)
         undoButton.backgroundColor = .red
         
-        let redoButton = UIButton(frame: CGRect(x: 100, y: 250, width: 100, height: 100))
-        addSubview(redoButton)
+        /// 重做
+        let redoButton = UIButton(frame: CGRect(x: undoButton.right + 10, y: 0, width: bottomView.height, height: bottomView.height))
+        bottomView.addSubview(redoButton)
         redoButton.addTarget(self, action: #selector(redo), for: .touchUpInside)
         redoButton.backgroundColor = .blue
+        
+        /// 颜色选择
+        let collectionViewLayout = UICollectionViewFlowLayout()
+        let itemW = bottomView.height
+        let itemCount = CGFloat(5)
+        let innerW = (screenWidth - itemCount * 50) / itemCount
+        collectionViewLayout.itemSize = CGSize(width: itemW , height: itemW)
+        collectionViewLayout.minimumLineSpacing = innerW
+        collectionViewLayout.minimumInteritemSpacing = 10
+        collectionViewLayout.scrollDirection = .horizontal
+        collectionViewLayout.sectionInset = UIEdgeInsets(top: 0, left: innerW / 2, bottom: 0, right: innerW / 2)
+        
+        let collectionView = PJLineCollectionView(frame: CGRect(x: redoButton.right, y: 0, width: bottomView.width - redoButton.right, height: bottomView.height), collectionViewLayout: collectionViewLayout)
+        collectionView.backgroundColor = .clear
+        collectionView.lineType = .color
+        collectionView.viewColorModels = [.black, .red, .gray, .green, .purple, .blue]
+        bottomView.addSubview(collectionView)
+        
+        collectionView.cellSelected = { cellIndex in
+            self.brushColor = collectionView.viewColorModels![cellIndex]
+        }
     }
     
     @objc
@@ -105,11 +135,6 @@ class UNBrushView: UIView {
         }
     }
     
-    override func layoutSubviews() {
-        bgView.frame = CGRect(x: 0, y: 0, width: width, height: height)
-        canvaView.frame = CGRect(x: 0, y: 0, width: width, height: height)
-    }
-    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         let beginPoint = touches.first?.location(in: self)
         let bezierPath = UIBezierPath()
@@ -141,6 +166,7 @@ class UNBrushView: UIView {
                                        controlPoint1: points[1],
                                        controlPoint2: points[2])
             
+            // 延续三次贝塞尔曲线点
             points[0] = points[3]
             points[1] = points[4]
             pointIndex = 1
@@ -157,6 +183,7 @@ class UNBrushView: UIView {
         
         bgView.image = bgImage
         undoDatas.append(bgImage!.pngData()!)
+        // 每次画完都要从画布上清除最后一笔
         canvaView.brunsh(brush: nil)
     }
     
@@ -168,7 +195,6 @@ class UNBrushView: UIView {
         
         return bgImage!
     }
-
 }
 
 extension UNBrushView {

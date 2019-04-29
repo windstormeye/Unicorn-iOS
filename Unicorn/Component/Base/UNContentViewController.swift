@@ -9,13 +9,11 @@
 import UIKit
 
 class UNContentViewController: UIViewController {
-
     private var stickerViews = [UNSticerView]()
     private var bottomCollectionView: PJLineCollectionView?
-    private var itemImageNames = ["背景", "贴纸", "文字", "图片"]
     private var itemColors = [UIColor.black, UIColor.white, UIColor.red, UIColor.blue, UIColor.green]
     private var imagePicker = UIImagePickerController()
-
+    private var bgImageView = UIImageView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,21 +21,23 @@ class UNContentViewController: UIViewController {
     }
     
     private func initView() {
-//        view.backgroundColor = .white
-        view.backgroundColor = .black
+        view.backgroundColor = .white
 
-        let brushView = UNBrushView(frame: CGRect(x: 0, y: 0, width: view.width, height: view.height))
+        let brushView = UNBrushView(frame: CGRect(x: 0, y: topSafeAreaHeight, width: view.width, height: view.height - bottomSafeAreaHeight - 64 - topSafeAreaHeight))
+        brushView.isHidden = true
         view.addSubview(brushView)
         
+        bgImageView.frame = CGRect(x: 0, y: brushView.y, width: view.width, height: brushView.height)
+        view.addSubview(bgImageView)
+        
         let stickerWow = UNSticerView(frame: CGRect(x: 100, y: 100, width: 100, height: 100))
-//        view.addSubview(stickerWow)
+        view.addSubview(stickerWow)
         stickerViews.append(stickerWow)
         stickerWow.imgViewModel = UNSticerView.ImageStickerViewModel(image: UIImage(named: "sticker_wow")!)
         
         let collectionViewLayout = UICollectionViewFlowLayout()
         let itemW = 50
-        var itemCount = CGFloat(itemImageNames.count)
-        if itemCount > 5 { itemCount = CGFloat(5) }
+        let itemCount = CGFloat(5)
         let innerW = (screenWidth - itemCount * 50) / itemCount
         collectionViewLayout.itemSize = CGSize(width: itemW , height: itemW)
         collectionViewLayout.minimumLineSpacing = innerW
@@ -45,18 +45,24 @@ class UNContentViewController: UIViewController {
         collectionViewLayout.scrollDirection = .horizontal
         collectionViewLayout.sectionInset = UIEdgeInsets(top: 0, left: innerW / 2, bottom: 0, right: innerW / 2)
         
-        let collectionView = PJLineCollectionView(frame: CGRect(x: 0, y: view.height - bottomSafeAreaHeight - 64, width: view.width, height: 64), collectionViewLayout: collectionViewLayout)
+        let collectionView = PJLineCollectionView(frame: CGRect(x: 0, y: view.height - bottomSafeAreaHeight - 64, width: view.width, height: 64 + bottomSafeAreaHeight), collectionViewLayout: collectionViewLayout)
         collectionView.backgroundColor = UIColor(red: 54/255, green: 149/255, blue: 1, alpha: 1)
         self.bottomCollectionView = collectionView
         collectionView.lineType = .icon
-//        view.addSubview(collectionView)
+        view.addSubview(collectionView)
         
         collectionView.cellSelected = { cellIndex in
             switch cellIndex {
-            case 0: self.present(self.colorBottomView,
-                                 animated: true,
-                                 completion: nil)
+            case 0:
+                brushView.isHidden = true
+                self.bgImageView.image = brushView.drawImage()
+                
+                self.present(self.colorBottomView, animated: true, completion: nil)
+            
             case 2:
+                brushView.isHidden = true
+                self.bgImageView.image = brushView.drawImage()
+                
                 let vc = UNTextViewController()
                 self.present(vc, animated: true, completion: nil)
                 vc.complateHandler = {
@@ -65,11 +71,19 @@ class UNContentViewController: UIViewController {
                     stickerLabel.textViewModel = $0
                     self.stickerViews.append(stickerLabel)
                 }
+                
             case 3:
+                brushView.isHidden = true
+                self.bgImageView.image = brushView.drawImage()
+                
                 self.imagePicker.delegate = self
                 self.imagePicker.sourceType = .photoLibrary
                 self.present(self.imagePicker, animated: true, completion: nil)
                 
+            case 4:
+                brushView.isHidden = false
+                self.bgImageView.image = nil
+                self.view.bringSubviewToFront(brushView)
             default: break
             }
         }

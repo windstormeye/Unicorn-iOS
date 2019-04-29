@@ -59,7 +59,7 @@ extension PJLineCollectionView: UICollectionViewDataSource {
             guard let viewColorModels = viewColorModels else { return 0 }
             return viewColorModels.count
         case .icon:
-            return 4
+            return 5
         }
         
     }
