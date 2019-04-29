@@ -44,6 +44,7 @@ class UNTouchView: UIView {
         closeButton.layer.cornerRadius = 12
         closeButton.layer.masksToBounds = true
         closeButton.isHidden = true
+        closeButton.addTarget(self, action: .close, for: .touchUpInside)
         
         let pinchGesture = UIPinchGestureRecognizer(target: self, action: .pinch)
         pinchGesture.delegate = self
@@ -67,7 +68,7 @@ class UNTouchView: UIView {
     @objc
     fileprivate func closeButtonClick() {
         if viewDelegate != nil {
-            viewDelegate!.UNTouchViewCloseButtonClick()
+            viewDelegate!.UNTouchViewCloseButtonClick(sticker: self)
         } else {
             removeFromSuperview()
         }
@@ -113,10 +114,10 @@ extension UNTouchView: UIGestureRecognizerDelegate {
 }
 
 protocol UNTouchViewProtocol {
-    func UNTouchViewCloseButtonClick()
+    func UNTouchViewCloseButtonClick(sticker: UNTouchView)
 }
 
 private extension UNTouchViewProtocol {
-    func UNTouchViewCloseButtonClick() {}
+    func UNTouchViewCloseButtonClick(sticker: UNTouchView) {}
 }
 

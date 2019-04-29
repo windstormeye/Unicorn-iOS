@@ -22,6 +22,7 @@
 		0C51B80F2249169B00046753 /* UNContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C51B80E2249169B00046753 /* UNContentViewController.swift */; };
 		0C6A987922756D72003E4AA5 /* UNBrushView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C6A987822756D72003E4AA5 /* UNBrushView.swift */; };
 		0C6A987B22756E81003E4AA5 /* UNCanvaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C6A987A22756E81003E4AA5 /* UNCanvaView.swift */; };
+		0C6A987F22769C83003E4AA5 /* UNStickerComponentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C6A987E22769C83003E4AA5 /* UNStickerComponentView.swift */; };
 		0C784A452253B4D500D1025A /* UNTextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C784A442253B4D500D1025A /* UNTextViewController.swift */; };
 		0C784A472253B8D700D1025A /* Define.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C784A462253B8D700D1025A /* Define.swift */; };
 		0C784A4F2255A69900D1025A /* PJLineCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C784A4D2255A69900D1025A /* PJLineCollectionViewCell.swift */; };
@@ -59,6 +60,7 @@
 		0C51B80E2249169B00046753 /* UNContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UNContentViewController.swift; sourceTree = "<group>"; };
 		0C6A987822756D72003E4AA5 /* UNBrushView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UNBrushView.swift; sourceTree = "<group>"; };
 		0C6A987A22756E81003E4AA5 /* UNCanvaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UNCanvaView.swift; sourceTree = "<group>"; };
+		0C6A987E22769C83003E4AA5 /* UNStickerComponentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UNStickerComponentView.swift; sourceTree = "<group>"; };
 		0C784A442253B4D500D1025A /* UNTextViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UNTextViewController.swift; sourceTree = "<group>"; };
 		0C784A462253B8D700D1025A /* Define.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Define.swift; sourceTree = "<group>"; };
 		0C784A4D2255A69900D1025A /* PJLineCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PJLineCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -279,6 +281,7 @@
 			isa = PBXGroup;
 			children = (
 				0C51B80B22490FA600046753 /* UNSticerView.swift */,
+				0C6A987E22769C83003E4AA5 /* UNStickerComponentView.swift */,
 			);
 			path = Sticker;
 			sourceTree = "<group>";
@@ -384,6 +387,7 @@
 				0C51B80C22490FA600046753 /* UNSticerView.swift in Sources */,
 				0C784A502255A69900D1025A /* PJLineCollectionViewLayout.swift in Sources */,
 				0CDB648A224905F100ED48D0 /* UNTouchView.swift in Sources */,
+				0C6A987F22769C83003E4AA5 /* UNStickerComponentView.swift in Sources */,
 				0C13E95922572B2F00346A2D /* EFColorComponentView.swift in Sources */,
 				0CDB64852247CE2900ED48D0 /* UNHomeViewController.swift in Sources */,
 				0C13E95322571CB500346A2D /* EFHSBView.swift in Sources */,

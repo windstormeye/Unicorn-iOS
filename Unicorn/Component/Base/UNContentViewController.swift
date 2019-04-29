@@ -14,6 +14,8 @@ class UNContentViewController: UIViewController {
     private var itemColors = [UIColor.black, UIColor.white, UIColor.red, UIColor.blue, UIColor.green]
     private var imagePicker = UIImagePickerController()
     private var bgImageView = UIImageView()
+    private var stickerComponentView = UNStickerComponentView()
+    private var stickerTag = 1000
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,18 +25,31 @@ class UNContentViewController: UIViewController {
     private func initView() {
         view.backgroundColor = .white
 
+        // 画笔
         let brushView = UNBrushView(frame: CGRect(x: 0, y: topSafeAreaHeight, width: view.width, height: view.height - bottomSafeAreaHeight - 64 - topSafeAreaHeight))
         brushView.isHidden = true
         view.addSubview(brushView)
         
+        // 背景图片
         bgImageView.frame = CGRect(x: 0, y: brushView.y, width: view.width, height: brushView.height)
         view.addSubview(bgImageView)
+        let tap = UITapGestureRecognizer(target: self, action: #selector(hiddenView))
+        bgImageView.isUserInteractionEnabled = true
+        bgImageView.addGestureRecognizer(tap)
         
-        let stickerWow = UNSticerView(frame: CGRect(x: 100, y: 100, width: 100, height: 100))
-        view.addSubview(stickerWow)
-        stickerViews.append(stickerWow)
-        stickerWow.imgViewModel = UNSticerView.ImageStickerViewModel(image: UIImage(named: "sticker_wow")!)
+        stickerComponentView = UNStickerComponentView(frame: CGRect(x: 0, y: view.height, width: view.width, height: 200))
+        stickerComponentView.isHidden = true
+        view.addSubview(stickerComponentView)
+        stickerComponentView.sticker = {
+            $0.viewDelegate = self
+            $0.center = self.view.center
+            $0.tag = self.stickerTag
+            self.stickerTag += 1
+            self.view.addSubview($0)
+            self.stickerViews.append($0)
+        }
         
+        // 底部功能栏
         let collectionViewLayout = UICollectionViewFlowLayout()
         let itemW = 50
         let itemCount = CGFloat(5)
@@ -54,12 +69,25 @@ class UNContentViewController: UIViewController {
         collectionView.cellSelected = { cellIndex in
             switch cellIndex {
             case 0:
+                self.stickerComponentView.isHidden = true
+                
                 brushView.isHidden = true
                 self.bgImageView.image = brushView.drawImage()
                 
                 self.present(self.colorBottomView, animated: true, completion: nil)
             
+            case 1:
+                brushView.isHidden = true
+                self.bgImageView.image = brushView.drawImage()
+                
+                self.stickerComponentView.isHidden = false
+                UIView.animate(withDuration: 0.25, animations: {
+                    self.stickerComponentView.bottom = self.bottomCollectionView!.y
+                })
+                
             case 2:
+                self.stickerComponentView.isHidden = true
+                
                 brushView.isHidden = true
                 self.bgImageView.image = brushView.drawImage()
                 
@@ -73,6 +101,8 @@ class UNContentViewController: UIViewController {
                 }
                 
             case 3:
+                self.stickerComponentView.isHidden = true
+                
                 brushView.isHidden = true
                 self.bgImageView.image = brushView.drawImage()
                 
@@ -81,10 +111,24 @@ class UNContentViewController: UIViewController {
                 self.present(self.imagePicker, animated: true, completion: nil)
                 
             case 4:
+                self.stickerComponentView.isHidden = true
+                
                 brushView.isHidden = false
                 self.bgImageView.image = nil
                 self.view.bringSubviewToFront(brushView)
             default: break
+            }
+        }
+    }
+    
+    @objc
+    fileprivate func hiddenView() {
+        stickerComponentView.isHidden = false
+        UIView.animate(withDuration: 0.25, animations: {
+            self.stickerComponentView.y = self.view.height
+        }) {
+            if $0 {
+                self.stickerComponentView.isHidden = true
             }
         }
     }
@@ -157,4 +201,12 @@ extension UNContentViewController: UIImagePickerControllerDelegate {
 
 extension UNContentViewController: UINavigationControllerDelegate {
     
+}
+
+extension UNContentViewController: UNTouchViewProtocol {
+    func UNTouchViewCloseButtonClick(sticker: UNTouchView) {
+        print(sticker.tag)
+        sticker.removeFromSuperview()
+        stickerViews.remove(at: sticker.tag - 1000)
+    }
 }

@@ -16,6 +16,8 @@ class PJLineCollectionView: UICollectionView {
     var viewColorModels: [UIColor]? {didSet{ reloadData()}}
     var cellCenterXs = [CGFloat]()
     var lineType: LineType = .text
+    var iconTitle = "home-"
+    var iconCount = 5
     var cellSelected: ((Int) -> Void)?
     
     override init(frame: CGRect,
@@ -59,7 +61,7 @@ extension PJLineCollectionView: UICollectionViewDataSource {
             guard let viewColorModels = viewColorModels else { return 0 }
             return viewColorModels.count
         case .icon:
-            return 5
+            return iconCount
         }
         
     }
@@ -75,7 +77,7 @@ extension PJLineCollectionView: UICollectionViewDataSource {
         case .color:
             cell.viewColorModel = viewColorModels![indexPath.row]
         case .icon:
-            cell.image = UIImage(named: "home-\(indexPath.row)")
+            cell.image = UIImage(named: iconTitle + "\(indexPath.row)")
         }
         cellCenterXs.append(cell.center.x)
         

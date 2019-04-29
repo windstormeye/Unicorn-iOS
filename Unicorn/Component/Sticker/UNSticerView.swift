@@ -19,7 +19,7 @@ class UNSticerView: UNTouchView {
     
     lazy var imageStickerView: UIImageView = {
         let imageStickerView = UIImageView(frame: CGRect(x: 0, y: 0, width: width, height: height))
-        imageStickerView.layer.borderColor = UIColor.white.cgColor
+        imageStickerView.layer.borderColor = UIColor.lightGray.cgColor
         imageStickerView.contentMode = .scaleAspectFit
         imageStickerView.layer.masksToBounds = true
         addSubview(imageStickerView)
