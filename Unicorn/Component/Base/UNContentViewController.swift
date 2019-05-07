@@ -25,6 +25,8 @@ class UNContentViewController: UIViewController {
     private func initView() {
         view.backgroundColor = .white
 
+        User.shared.login()
+        
         // 画笔
         let brushView = UNBrushView(frame: CGRect(x: 0, y: topSafeAreaHeight, width: view.width, height: view.height - bottomSafeAreaHeight - 64 - topSafeAreaHeight))
         brushView.isHidden = true
