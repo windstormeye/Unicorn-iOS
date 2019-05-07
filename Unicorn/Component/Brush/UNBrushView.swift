@@ -66,14 +66,14 @@ class UNBrushView: UIView {
         // 撤回
         let undoButton = UIButton(frame: CGRect(x: 0, y: 0, width: bottomView.height, height: bottomView.height))
         bottomView.addSubview(undoButton)
+        undoButton.setImage(UIImage(named: "back"), for: .normal)
         undoButton.addTarget(self, action: #selector(undo), for: .touchUpInside)
-        undoButton.backgroundColor = .red
         
         /// 重做
         let redoButton = UIButton(frame: CGRect(x: undoButton.right + 10, y: 0, width: bottomView.height, height: bottomView.height))
         bottomView.addSubview(redoButton)
+        redoButton.setImage(UIImage(named: "return"), for: .normal)
         redoButton.addTarget(self, action: #selector(redo), for: .touchUpInside)
-        redoButton.backgroundColor = .blue
         
         /// 颜色选择
         let collectionViewLayout = UICollectionViewFlowLayout()
