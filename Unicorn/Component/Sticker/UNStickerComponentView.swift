@@ -45,6 +45,7 @@ class UNStickerComponentView: UIView {
             let sticker = UNSticerView()
             sticker.width = 100
             sticker.height = 100
+            sticker.defaultIndex = cellIndex
             sticker.imgViewModel = UNSticerView.ImageStickerViewModel(image: stickerImage!)
             self.sticker?(sticker)
         }

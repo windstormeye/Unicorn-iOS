@@ -9,12 +9,22 @@
 import UIKit
 
 class UNSticerView: UNTouchView {
+    var stickerType: StickerType = .default
+    var defaultIndex: Int = 0
+    var id: Int?
+    
     var imgViewModel: ImageStickerViewModel? {
-        didSet { imageStickerView.image = imgViewModel!.image }
+        didSet {
+            imageStickerView.image = imgViewModel!.image
+            stickerType = .custom
+        }
     }
     
     var textViewModel: TextStickerViewModel? {
-        didSet { textStickerView.viewModel = textViewModel! }
+        didSet {
+            textStickerView.viewModel = textViewModel!
+            stickerType = .custom
+        }
     }
     
     lazy var imageStickerView: UIImageView = {
@@ -55,6 +65,11 @@ extension UNSticerView {
         let text: String
         let textColor: UIColor
         let textFont: UIFont
+    }
+    
+    enum StickerType: Int {
+        case `default` = 0
+        case custom
     }
 }
 

@@ -35,7 +35,7 @@ class User {
                                 let dataDict = $0 as! Dictionary<String, Any>
                                 self.viewModel.phoneNumber = username
                                 self.viewModel.token = (dataDict["token"] as! String)
-                                self.viewModel.uid = (dataDict["id"] as! Int)
+                                self.viewModel.uid = (dataDict["userId"] as! Int)
                                 
             self.saveToSandBox()
             

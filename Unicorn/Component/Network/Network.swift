@@ -58,8 +58,12 @@ class Network {
             //            guard error != nil else { failedHanler(error) }
             
             // 加上 do-catch
-            let resDict = try! JSONSerialization.jsonObject(with: responseData!, options: .allowFragments)
-            complateHandler(resDict)
+            if responseData?.count != 0 {
+                let resDict = try! JSONSerialization.jsonObject(with: responseData!, options: .allowFragments)
+                complateHandler(resDict)
+            } else {
+                complateHandler("")
+            }
         }
         task.resume()
     }

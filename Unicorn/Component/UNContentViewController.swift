@@ -9,7 +9,7 @@
 import UIKit
 
 class UNContentViewController: UIViewController {
-    var bookId = 0
+    var bookId: Int?
     
     private var stickerViews = [UNSticerView]()
     private var bottomCollectionView: PJLineCollectionView?
@@ -96,10 +96,23 @@ class UNContentViewController: UIViewController {
                 
                 let vc = UNTextViewController()
                 self.present(vc, animated: true, completion: nil)
-                vc.complateHandler = {
+                vc.complateHandler = { viewModel in
                     let stickerLabel = UNSticerView(frame: CGRect(x: 150, y: 150, width: 100, height: 100))
                     self.view.addSubview(stickerLabel)
-                    stickerLabel.textViewModel = $0
+                    stickerLabel.textViewModel = viewModel
+                    stickerLabel.touched = { s in
+                        let _ = self.stickerViews.filter({
+                            // TODO: 只判断文本会有些问题
+                            if $0.textViewModel?.text == viewModel.text {
+                                $0.x = s.x
+                                $0.y = s.y
+                                $0.width = s.width
+                                $0.height = s.height
+                                return true
+                            }
+                            return false
+                        })
+                    }
                     self.stickerViews.append(stickerLabel)
                 }
                 
@@ -124,9 +137,90 @@ class UNContentViewController: UIViewController {
         }
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        Sticker.shared.get(bookId: bookId!, complateHandler: {
+            for sticker in $0 {
+                let stickerView = UNSticerView(frame: CGRect(x: sticker["x"] as! CGFloat, y: sticker["y"] as! CGFloat, width: sticker["w"] as! CGFloat, height: sticker["h"] as! CGFloat))
+                stickerView.id = (sticker["id"] as! Int)
+                
+                if sticker["type"] as! Int == 1 {
+                    stickerView.imgViewModel = UNSticerView.ImageStickerViewModel(image: UIImage(named: "贴纸" + String(sticker["defaultIndex"] as! Int))!)
+                }
+                
+                stickerView.touched = { s in
+                    let _ = self.stickerViews.filter({
+                        // TODO: 只判断文本会有些问题
+                        let s = s as! UNSticerView
+                        if $0.id! == s.id! {
+                            $0.x = s.x
+                            $0.y = s.y
+                            $0.width = s.width
+                            $0.height = s.height
+                            return true
+                        }
+                        return false
+                    })
+                }
+                
+                self.stickerViews.append(stickerView)
+                
+                DispatchQueue.main.async {
+                    self.view.addSubview(stickerView)
+                }
+            }
+        }) {
+            print($0)
+        }
+    }
+    
     @objc
     private func done() {
-        
+        var sIndex = 0
+        for sticker in stickerViews {
+            if sticker.id != nil {
+                let viewModel = Sticker.ViewModel(id: sticker.id!,
+                                                  x: sticker.x,
+                                                  y: sticker.y,
+                                                  w: sticker.width,
+                                                  h: sticker.height,
+                                                  type: sticker.stickerType.rawValue,
+                                                  data: nil,
+                                                  bookId: bookId!,
+                                                  defaultIndex: sticker.defaultIndex)
+                Sticker.shared.update(viewModel: viewModel, complateHandler: {
+                    sIndex += 1
+                    if sIndex == self.stickerViews.count {
+                        DispatchQueue.main.async {
+                            self.navigationController?.popViewController(animated: true)
+                        }
+                    }
+                }) {
+                    print($0)
+                }
+            } else {
+                let viewModel = Sticker.ViewModel(id: nil,
+                                                  x: sticker.x,
+                                                  y: sticker.y,
+                                                  w: sticker.width,
+                                                  h: sticker.height,
+                                                  type: sticker.stickerType.rawValue,
+                                                  data: nil,
+                                                  bookId: nil,
+                                                  defaultIndex: sticker.defaultIndex)
+                Sticker.shared.create(viewModel: viewModel, complateHandler: {
+                    sIndex += 1
+                    if sIndex == self.stickerViews.count {
+                        DispatchQueue.main.async {
+                            self.navigationController?.popViewController(animated: true)
+                        }
+                    }
+                }) {
+                    print($0)
+                }
+            }
+        }
     }
     
     @objc

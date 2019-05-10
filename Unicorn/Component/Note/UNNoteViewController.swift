@@ -56,6 +56,7 @@ class UNNoteViewController: UIViewController {
             let sb = UIStoryboard(name: "UNUserLoginViewController", bundle: nil)
             let vc = sb.instantiateViewController(withIdentifier: "UNUserLoginViewController")
             present(vc, animated: true, completion: nil)
+            return
         }
         
         Note.shared.get(compalteHandler: {
