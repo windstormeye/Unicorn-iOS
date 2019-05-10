@@ -9,6 +9,8 @@
 import UIKit
 
 class UNContentViewController: UIViewController {
+    var bookId = 0
+    
     private var stickerViews = [UNSticerView]()
     private var bottomCollectionView: PJLineCollectionView?
     private var itemColors = [UIColor.black, UIColor.white, UIColor.red, UIColor.blue, UIColor.green]
@@ -24,6 +26,7 @@ class UNContentViewController: UIViewController {
     
     private func initView() {
         view.backgroundColor = .white
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(done))
         
         // 画笔
         let brushView = UNBrushView(frame: CGRect(x: 0, y: topSafeAreaHeight, width: view.width, height: view.height - bottomSafeAreaHeight - 64 - topSafeAreaHeight))
@@ -119,6 +122,11 @@ class UNContentViewController: UIViewController {
             default: break
             }
         }
+    }
+    
+    @objc
+    private func done() {
+        
     }
     
     @objc

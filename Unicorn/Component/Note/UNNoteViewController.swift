@@ -43,7 +43,9 @@ class UNNoteViewController: UIViewController {
         view.addSubview(collectionView)
         
         collectionView.cellSelected = { cellIndex in
-
+            let vc = UNContentViewController()
+            vc.bookId = self.coverIds[cellIndex]
+            self.navigationController?.pushViewController(vc, animated: true)
         }
     }
     

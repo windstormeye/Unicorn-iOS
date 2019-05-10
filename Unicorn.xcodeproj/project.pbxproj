@@ -187,11 +187,19 @@
 		0C2019DD2285162700AE8C2B /* Note */ = {
 			isa = PBXGroup;
 			children = (
+				0C2019E422857B5C00AE8C2B /* Sevices */,
 				0C2019DE2285163800AE8C2B /* UNNoteViewController.swift */,
-				0C2019E22285474C00AE8C2B /* Note.swift */,
 				0C2019E02285236700AE8C2B /* UNNoteCreateViewController.swift */,
 			);
 			path = Note;
+			sourceTree = "<group>";
+		};
+		0C2019E422857B5C00AE8C2B /* Sevices */ = {
+			isa = PBXGroup;
+			children = (
+				0C2019E22285474C00AE8C2B /* Note.swift */,
+			);
+			path = Sevices;
 			sourceTree = "<group>";
 		};
 		0C3814AC2253A72E0055E56A /* Text */ = {
