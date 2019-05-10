@@ -13,29 +13,64 @@ class User {
     var viewModel = ViewModel()
     static let userAccountPath =  NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true).first!
     
-    func login() {
-        
-//        Network.shared.get(urlString: "http://localhost:8080/api/user", complateHandler: { (dict) in
-//            print(dict)
-//        }) { (error) in
-//
-//        }
+    init() {
+        let viewModel = readBySandBox()
+        if viewModel != nil {
+            self.viewModel = viewModel!
+        }
+    }
+    
+    func login(username: String,
+               password: String,
+               complateHandler: @escaping (() -> Void),
+               failedHandler: @escaping ((Error) -> Void)) {
+        let params = [
+            "phoneNumber": username,
+            "password": password,
+            "nickname": "",
+        ]
+        Network.shared.post(urlString: "http://localhost:8080/login",
+                            params: params,
+                            complateHandler: {
+                                let dataDict = $0 as! Dictionary<String, Any>
+                                self.viewModel.phoneNumber = username
+                                self.viewModel.token = (dataDict["token"] as! String)
+                                self.viewModel.uid = (dataDict["id"] as! Int)
+                                
+            self.saveToSandBox()
+            
+            complateHandler()
+        }) {
+            print($0!)
+            failedHandler($0!)
+        }
     }
     
     func details() {
         
     }
     
-    func register() {
+    func register(username: String,
+                  password: String,
+                  complateHandler: @escaping (() -> Void),
+                  failedHandler: @escaping ((Error) -> Void)) {
         let params = [
-            "phoneNumber": "18811758981",
-            "password": "woaiwoziji123",
-            "nickname": "pjhubs",
+            "phoneNumber": username,
+            "password": password,
+            "nickname": "",
         ]
-        Network.shared.post(urlString: "http://localhost:8080/register", params: params, complateHandler: { (dataArr) in
-            print(dataArr)
+        Network.shared.post(urlString: "http://localhost:8080/register",
+                            params: params,
+                            complateHandler: { (dataArr) in
+                                self.login(username: username,
+                                           password: password,
+                                           complateHandler: {
+                                            complateHandler()
+                                }, failedHandler: {
+                                    failedHandler($0)
+                                })
         }) {
-            print($0)
+            failedHandler($0!)
         }
     }
     

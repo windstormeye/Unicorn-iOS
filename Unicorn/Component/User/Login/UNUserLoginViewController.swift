@@ -10,21 +10,42 @@ import UIKit
 
 class UNUserLoginViewController: UIViewController {
 
+    @IBOutlet weak var phoneNumberTextField: UITextField!
+    @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var loginButton: UIButton!
+    @IBOutlet weak var registerButton: UIButton!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        initView()
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    private func initView() {
+        
     }
-    */
+    
+    @IBAction func loginButtonTapped(_ sender: Any) {
+        guard phoneNumberTextField.text != nil else { return }
+        guard passwordTextField.text != nil else { return }
+        
 
+        User.shared.login(username: phoneNumberTextField.text!, password: passwordTextField.text!, complateHandler: {
+            self.dismiss(animated: true, completion: nil)
+        }) {
+            print($0)
+        }
+    }
+    
+    @IBAction func registerButtonTapped(_ sender: Any) {
+        guard phoneNumberTextField.text != nil else { return }
+        guard passwordTextField.text != nil else { return }
+        
+        User.shared.register(username: phoneNumberTextField.text!, password: passwordTextField.text!, complateHandler: {
+            self.dismiss(animated: true, completion: nil)
+        }) {
+            print($0)
+        }
+    }
+    
 }

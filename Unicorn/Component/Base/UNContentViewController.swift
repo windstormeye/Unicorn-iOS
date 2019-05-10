@@ -24,8 +24,6 @@ class UNContentViewController: UIViewController {
     
     private func initView() {
         view.backgroundColor = .white
-
-        User.shared.login()
         
         // 画笔
         let brushView = UNBrushView(frame: CGRect(x: 0, y: topSafeAreaHeight, width: view.width, height: view.height - bottomSafeAreaHeight - 64 - topSafeAreaHeight))
@@ -120,6 +118,16 @@ class UNContentViewController: UIViewController {
                 self.view.bringSubviewToFront(brushView)
             default: break
             }
+        }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if User.shared.viewModel.token == nil {
+            let sb = UIStoryboard(name: "UNUserLoginViewController", bundle: nil)
+            let vc = sb.instantiateViewController(withIdentifier: "UNUserLoginViewController")
+            present(vc, animated: true, completion: nil)
         }
     }
     

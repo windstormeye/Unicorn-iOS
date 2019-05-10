@@ -290,8 +290,8 @@
 		0CDB64712247CDB600ED48D0 /* Unicorn */ = {
 			isa = PBXGroup;
 			children = (
-				0C784A482253B8E500D1025A /* Config */,
 				0CDB64722247CDB600ED48D0 /* AppDelegate.swift */,
+				0C784A482253B8E500D1025A /* Config */,
 				0C51B80622490AF700046753 /* Extension */,
 				0CDB64882249058C00ED48D0 /* Component */,
 				0CDB64862249053E00ED48D0 /* Home */,
