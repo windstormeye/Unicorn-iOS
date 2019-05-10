@@ -49,17 +49,29 @@ class PJLineCollectionViewCell: UICollectionViewCell {
         case .text:
             tipsLabel?.isHidden = false
             iconImageView?.isHidden = true
+            
         case .color:
             tipsLabel?.isHidden = true
             iconImageView?.isHidden = true
             backgroundColor = viewColorModel
             layer.cornerRadius = width / 2
-            layer.borderColor = UIColor.rgb(220, 220, 220).cgColor
-            layer.borderWidth = 1
             
         case .icon:
             iconImageView?.isHidden = false
             iconImageView?.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
+            
+        case .cover:
+            iconImageView?.isHidden = true
+            
+            tipsLabel?.isHidden = false
+            tipsLabel?.height = 20
+            tipsLabel?.left = 5
+            tipsLabel?.width -= 5
+            tipsLabel?.top = height - tipsLabel!.height - 10
+            tipsLabel?.textAlignment = .left
+            
+            backgroundColor = viewColorModel
+            layer.cornerRadius = 10
         }
     }
 }

@@ -62,6 +62,9 @@ extension PJLineCollectionView: UICollectionViewDataSource {
             return viewColorModels.count
         case .icon:
             return iconCount
+        case .cover:
+            guard let viewColorModels = viewColorModels else { return 0 }
+            return viewColorModels.count
         }
         
     }
@@ -78,6 +81,12 @@ extension PJLineCollectionView: UICollectionViewDataSource {
             cell.viewColorModel = viewColorModels![indexPath.row]
         case .icon:
             cell.image = UIImage(named: iconTitle + "\(indexPath.row)")
+        case .cover:
+            cell.viewColorModel = viewColorModels![indexPath.row]
+            cell.viewModel = viewModels![indexPath.row]
+            cell.layer.shadowColor = UIColor.black.cgColor
+            cell.layer.shadowOffset = CGSize(width: 0, height: 0)
+            cell.layer.shadowOpacity = 0.4
         }
         cellCenterXs.append(cell.center.x)
         
@@ -90,6 +99,7 @@ extension PJLineCollectionView {
         case text
         case color
         case icon
+        case cover
     }
 }
 

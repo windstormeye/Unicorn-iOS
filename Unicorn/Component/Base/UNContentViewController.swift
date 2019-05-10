@@ -121,16 +121,6 @@ class UNContentViewController: UIViewController {
         }
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        if User.shared.viewModel.token == nil {
-            let sb = UIStoryboard(name: "UNUserLoginViewController", bundle: nil)
-            let vc = sb.instantiateViewController(withIdentifier: "UNUserLoginViewController")
-            present(vc, animated: true, completion: nil)
-        }
-    }
-    
     @objc
     fileprivate func hiddenView() {
         stickerComponentView.isHidden = false

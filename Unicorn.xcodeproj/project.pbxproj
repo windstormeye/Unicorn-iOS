@@ -20,6 +20,9 @@
 		0C2019C92281BF5A00AE8C2B /* UNUserLoginViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0C2019C82281BF5A00AE8C2B /* UNUserLoginViewController.storyboard */; };
 		0C2019CD2281BFEE00AE8C2B /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2019CC2281BFEE00AE8C2B /* User.swift */; };
 		0C2019D02281C1D200AE8C2B /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2019CF2281C1D200AE8C2B /* Network.swift */; };
+		0C2019DF2285163800AE8C2B /* UNNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2019DE2285163800AE8C2B /* UNNoteViewController.swift */; };
+		0C2019E12285236700AE8C2B /* UNNoteCreateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2019E02285236700AE8C2B /* UNNoteCreateViewController.swift */; };
+		0C2019E32285474C00AE8C2B /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2019E22285474C00AE8C2B /* Note.swift */; };
 		0C51B80822490B1800046753 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C51B80722490B1800046753 /* UIView.swift */; };
 		0C51B80A22490C7E00046753 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C51B80922490C7E00046753 /* UIColor.swift */; };
 		0C51B80C22490FA600046753 /* UNSticerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C51B80B22490FA600046753 /* UNSticerView.swift */; };
@@ -62,6 +65,9 @@
 		0C2019C82281BF5A00AE8C2B /* UNUserLoginViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = UNUserLoginViewController.storyboard; sourceTree = "<group>"; };
 		0C2019CC2281BFEE00AE8C2B /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		0C2019CF2281C1D200AE8C2B /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
+		0C2019DE2285163800AE8C2B /* UNNoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UNNoteViewController.swift; sourceTree = "<group>"; };
+		0C2019E02285236700AE8C2B /* UNNoteCreateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UNNoteCreateViewController.swift; sourceTree = "<group>"; };
+		0C2019E22285474C00AE8C2B /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
 		0C51B80722490B1800046753 /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		0C51B80922490C7E00046753 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		0C51B80B22490FA600046753 /* UNSticerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UNSticerView.swift; sourceTree = "<group>"; };
@@ -176,6 +182,16 @@
 				0C2019CF2281C1D200AE8C2B /* Network.swift */,
 			);
 			path = Network;
+			sourceTree = "<group>";
+		};
+		0C2019DD2285162700AE8C2B /* Note */ = {
+			isa = PBXGroup;
+			children = (
+				0C2019DE2285163800AE8C2B /* UNNoteViewController.swift */,
+				0C2019E22285474C00AE8C2B /* Note.swift */,
+				0C2019E02285236700AE8C2B /* UNNoteCreateViewController.swift */,
+			);
+			path = Note;
 			sourceTree = "<group>";
 		};
 		0C3814AC2253A72E0055E56A /* Text */ = {
@@ -323,6 +339,7 @@
 		0CDB64882249058C00ED48D0 /* Component */ = {
 			isa = PBXGroup;
 			children = (
+				0C2019DD2285162700AE8C2B /* Note */,
 				0C2019CE2281C1CA00AE8C2B /* Network */,
 				0C2019C52281BE4400AE8C2B /* User */,
 				0C51B80D2249168500046753 /* Base */,
@@ -425,12 +442,14 @@
 				0C2019D02281C1D200AE8C2B /* Network.swift in Sources */,
 				0C784A472253B8D700D1025A /* Define.swift in Sources */,
 				0C51B80C22490FA600046753 /* UNSticerView.swift in Sources */,
+				0C2019E12285236700AE8C2B /* UNNoteCreateViewController.swift in Sources */,
 				0C784A502255A69900D1025A /* PJLineCollectionViewLayout.swift in Sources */,
 				0CDB648A224905F100ED48D0 /* UNTouchView.swift in Sources */,
 				0C6A987F22769C83003E4AA5 /* UNStickerComponentView.swift in Sources */,
 				0C13E95922572B2F00346A2D /* EFColorComponentView.swift in Sources */,
 				0CDB64852247CE2900ED48D0 /* UNHomeViewController.swift in Sources */,
 				0C13E95322571CB500346A2D /* EFHSBView.swift in Sources */,
+				0C2019E32285474C00AE8C2B /* Note.swift in Sources */,
 				0C784A452253B4D500D1025A /* UNTextViewController.swift in Sources */,
 				0C784A4F2255A69900D1025A /* PJLineCollectionViewCell.swift in Sources */,
 				0C13E94F2256E9F000346A2D /* UNBottomSizeViewController.swift in Sources */,
@@ -441,6 +460,7 @@
 				0C51B80F2249169B00046753 /* UNContentViewController.swift in Sources */,
 				0C13E96122573B8A00346A2D /* UNBottomColorViewController.swift in Sources */,
 				0C51B80A22490C7E00046753 /* UIColor.swift in Sources */,
+				0C2019DF2285163800AE8C2B /* UNNoteViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

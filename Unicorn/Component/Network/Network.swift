@@ -11,10 +11,20 @@ import Foundation
 class Network {
     static let shared = Network()
     
-    func get(urlString: String,
-             complateHandler: @escaping ((Array<Any>) -> Void),
+    func get( urlString: String,
+             params: [String: String],
+             complateHandler: @escaping ((Any) -> Void),
              failedHanler: @escaping ((Error?) -> Void)) {
-        let url = URL(string: urlString)!
+        var tempUrlString = urlString + "?"
+        for d in params {
+            let dString = d.key + "=" + d.value + "&"
+            tempUrlString += dString
+        }
+        
+        tempUrlString.removeLast()
+        
+        
+        let url = URL(string: tempUrlString)!
         let request = URLRequest(url: url)
 
         let session = URLSession(configuration: URLSessionConfiguration.default)
@@ -23,7 +33,7 @@ class Network {
 //            guard error != nil else { failedHanler(error) }
 
             // 加上 do-catch
-            let resDict = try! JSONSerialization.jsonObject(with: responseData!, options: .allowFragments) as! Array<Any>
+            let resDict = try! JSONSerialization.jsonObject(with: responseData!, options: .allowFragments)
             complateHandler(resDict)
         }
         task.resume()
@@ -37,6 +47,9 @@ class Network {
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        if User.shared.viewModel.token != nil {
+            request.setValue("Bearer " + User.shared.viewModel.token!, forHTTPHeaderField: "Authorization")
+        }
         request.httpBody = try! JSONSerialization.data(withJSONObject: params, options: .prettyPrinted)
         
         let session = URLSession(configuration: URLSessionConfiguration.default)
