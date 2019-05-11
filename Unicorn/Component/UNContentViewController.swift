@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Alamofire
 
 class UNContentViewController: UIViewController {
     var bookId: Int?
@@ -50,22 +51,6 @@ class UNContentViewController: UIViewController {
             self.stickerTag += 1
             self.view.addSubview($0)
             self.stickerViews.append($0)
-            
-            $0.touched = { s in
-                let _ = self.stickerViews.filter({
-                    // TODO: 只判断文本会有些问题
-                    let s = s as! UNSticerView
-                    if $0.tag == s.tag {
-                        $0.x = s.x
-                        $0.y = s.y
-                        $0.width = s.width
-                        $0.height = s.height
-//                        $0.rotate = s.rotate
-                        return true
-                    }
-                    return false
-                })
-            }
         }
         
         // 底部功能栏
@@ -116,20 +101,6 @@ class UNContentViewController: UIViewController {
                     let stickerLabel = UNSticerView(frame: CGRect(x: 150, y: 150, width: 100, height: 100))
                     self.view.addSubview(stickerLabel)
                     stickerLabel.textViewModel = viewModel
-                    stickerLabel.touched = { s in
-                        let _ = self.stickerViews.filter({
-                            // TODO: 只判断文本会有些问题
-                            if $0.textViewModel?.text == viewModel.text {
-                                $0.x = s.x
-                                $0.y = s.y
-                                $0.width = s.width
-                                $0.height = s.height
-//                                $0.rotate = s.rotate
-                                return true
-                            }
-                            return false
-                        })
-                    }
                     self.stickerViews.append(stickerLabel)
                 }
                 
@@ -159,33 +130,13 @@ class UNContentViewController: UIViewController {
         
         Sticker.shared.get(bookId: bookId!, complateHandler: {
             for sticker in $0 {
-                let stickerView = UNSticerView(frame: CGRect(x: sticker["x"] as! CGFloat, y: sticker["y"] as! CGFloat, width: sticker["w"] as! CGFloat, height: sticker["h"] as! CGFloat))
-                stickerView.id = (sticker["id"] as! Int)
-                stickerView.rotate = sticker["rotate"] as! CGFloat
-                
-                if sticker["type"] as! Int == 1 {
-                    stickerView.imgViewModel = UNSticerView.ImageStickerViewModel(image: UIImage(named: "贴纸" + String(sticker["defaultIndex"] as! Int))!)
-                }
-                
-                stickerView.touched = { s in
-                    let _ = self.stickerViews.filter({
-                        let s = s as! UNSticerView
-                        if $0.id! == s.id! {
-                            $0.x = s.x
-                            $0.y = s.y
-                            $0.width = s.width
-                            $0.height = s.height
-                            $0.rotate = s.rotate
-                            return true
-                        }
-                        return false
-                    })
-                }
-                
-                self.stickerViews.append(stickerView)
-                
                 DispatchQueue.main.async {
+                    let stickerView = UIImageView(frame: CGRect(x: 0, y: self.view.y, width: self.view.width, height: self.view.height - self.bottomCollectionView!.height))
+                    stickerView.backgroundColor = .clear
+                    let imgData = try? Data(contentsOf: URL(string: sticker["link"] as! String)!)
+                    stickerView.image = UIImage(data: imgData!)
                     self.view.addSubview(stickerView)
+                    self.view.sendSubviewToBack(stickerView)
                 }
             }
         }) {
@@ -193,54 +144,94 @@ class UNContentViewController: UIViewController {
         }
     }
     
+    func saveImage(image: UIImage?) {
+        guard let imageToSave = image else {
+            return
+        }
+        
+        let urlString = "http://localhost:8080/api/sticker/upload?bookId=\(bookId!)"
+        // 压缩比例 0.7（有损压缩）
+        let imgData = imageToSave.jpegData(compressionQuality: 0.7)!
+        let imageName = "sticker.png"
+        Alamofire.upload(multipartFormData: { multipartFormData in
+            multipartFormData.append(imgData, withName: "file", fileName: imageName, mimeType: "image/png") }, to:urlString) {
+                
+                switch $0 {
+                case .success(let upload, _, _):
+                    // 图片上传进度
+                    upload.uploadProgress(closure: { (progress) in
+                        print("Upload Progress: \(progress.fractionCompleted)")
+                    })
+
+                    upload.responseJSON { response in
+                        DispatchQueue.main.async {
+                            self.navigationController?.popViewController(animated: true)
+                        }
+//                        print("response.result :\(String(describing: response.result.value))")
+                    }
+                    
+                case .failure(let encodingError):
+                    print(encodingError)
+                }
+        }
+    }
+    
     @objc
     private func done() {
-        var sIndex = 0
-        for sticker in stickerViews {
-            if sticker.id != nil {
-                let viewModel = Sticker.ViewModel(id: sticker.id!,
-                                                  x: sticker.x,
-                                                  y: sticker.y,
-                                                  w: sticker.width,
-                                                  h: sticker.height,
-                                                  rotate: sticker.rotate,
-                                                  type: sticker.stickerType.rawValue,
-                                                  data: nil,
-                                                  bookId: bookId!,
-                                                  defaultIndex: sticker.defaultIndex)
-                Sticker.shared.update(viewModel: viewModel, complateHandler: {
-                    sIndex += 1
-                    if sIndex == self.stickerViews.count {
-                        DispatchQueue.main.async {
-                            self.navigationController?.popViewController(animated: true)
-                        }
-                    }
-                }) {
-                    print($0)
-                }
-            } else {
-                let viewModel = Sticker.ViewModel(id: nil,
-                                                  x: sticker.x,
-                                                  y: sticker.y,
-                                                  w: sticker.width,
-                                                  h: sticker.height,
-                                                  rotate: sticker.rotate,
-                                                  type: sticker.stickerType.rawValue,
-                                                  data: nil,
-                                                  bookId: bookId!,
-                                                  defaultIndex: sticker.defaultIndex)
-                Sticker.shared.create(viewModel: viewModel, complateHandler: {
-                    sIndex += 1
-                    if sIndex == self.stickerViews.count {
-                        DispatchQueue.main.async {
-                            self.navigationController?.popViewController(animated: true)
-                        }
-                    }
-                }) {
-                    print($0)
-                }
-            }
-        }
+        
+        UIGraphicsBeginImageContextWithOptions(CGSize(width: view.width, height: view.height - bottomCollectionView!.height), false, UIScreen.main.scale)
+        view.layer.render(in: UIGraphicsGetCurrentContext()!)
+        let bgImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        saveImage(image: bgImage!)
+        
+//        var sIndex = 0
+//        for sticker in stickerViews {
+//            if sticker.id != nil {
+//                let viewModel = Sticker.ViewModel(id: sticker.id!,
+//                                                  x: sticker.x,
+//                                                  y: sticker.y,
+//                                                  w: sticker.width,
+//                                                  h: sticker.height,
+//                                                  rotate: sticker.rotate,
+//                                                  type: sticker.stickerType.rawValue,
+//                                                  data: nil,
+//                                                  bookId: bookId!,
+//                                                  defaultIndex: sticker.defaultIndex)
+//                Sticker.shared.update(viewModel: viewModel, complateHandler: {
+//                    sIndex += 1
+//                    if sIndex == self.stickerViews.count {
+//                        DispatchQueue.main.async {
+//                            self.navigationController?.popViewController(animated: true)
+//                        }
+//                    }
+//                }) {
+//                    print($0)
+//                }
+//            } else {
+//                let viewModel = Sticker.ViewModel(id: nil,
+//                                                  x: sticker.x,
+//                                                  y: sticker.y,
+//                                                  w: sticker.width,
+//                                                  h: sticker.height,
+//                                                  rotate: sticker.rotate,
+//                                                  type: sticker.stickerType.rawValue,
+//                                                  data: nil,
+//                                                  bookId: bookId!,
+//                                                  defaultIndex: sticker.defaultIndex)
+//                Sticker.shared.create(viewModel: viewModel, complateHandler: {
+//                    sIndex += 1
+//                    if sIndex == self.stickerViews.count {
+//                        DispatchQueue.main.async {
+//                            self.navigationController?.popViewController(animated: true)
+//                        }
+//                    }
+//                }) {
+//                    print($0)
+//                }
+//            }
+//        }
     }
     
     @objc

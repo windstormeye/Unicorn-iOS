@@ -9,7 +9,6 @@
 import UIKit
 
 class UNTouchView: UIView {
-    var touched: ((UNTouchView) -> Void)?
     var rotate: CGFloat = 0 
     var isSelected = false {
         didSet {
@@ -80,8 +79,6 @@ class UNTouchView: UIView {
         if gesture.state == .changed {
             transform = transform.scaledBy(x: gesture.scale, y: gesture.scale)
             gesture.scale = 1
-            
-            touched?(self)
         }
     }
     
@@ -91,8 +88,6 @@ class UNTouchView: UIView {
             rotate = gesture.rotation
             transform = transform.rotated(by: gesture.rotation)
             gesture.rotation = 0
-            
-            touched?(self)
         }
     }
     
@@ -102,8 +97,6 @@ class UNTouchView: UIView {
             let gesturePosition = gesture.translation(in: superview)
             center = CGPoint(x: center.x + gesturePosition.x, y: center.y + gesturePosition.y)
             gesture.setTranslation(.zero, in: superview)
-            
-            touched?(self)
         }
     }
 }

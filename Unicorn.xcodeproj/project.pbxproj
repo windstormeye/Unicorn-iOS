@@ -50,6 +50,7 @@
 		0CDB647D2247CDB700ED48D0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0CDB647B2247CDB700ED48D0 /* LaunchScreen.storyboard */; };
 		0CDB64852247CE2900ED48D0 /* UNHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CDB64842247CE2900ED48D0 /* UNHomeViewController.swift */; };
 		0CDB648A224905F100ED48D0 /* UNTouchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CDB6489224905F100ED48D0 /* UNTouchView.swift */; };
+		D5A7F5A7EE589453EDC77B6E /* libPods-Unicorn.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B5A61EF5EBB6B4DDD2DD8C74 /* libPods-Unicorn.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -98,6 +99,9 @@
 		0CDB647E2247CDB700ED48D0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0CDB64842247CE2900ED48D0 /* UNHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UNHomeViewController.swift; sourceTree = "<group>"; };
 		0CDB6489224905F100ED48D0 /* UNTouchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UNTouchView.swift; sourceTree = "<group>"; };
+		1501AEE6022D65928DA8578B /* Pods-Unicorn.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Unicorn.release.xcconfig"; path = "Pods/Target Support Files/Pods-Unicorn/Pods-Unicorn.release.xcconfig"; sourceTree = "<group>"; };
+		42DB928C04CA865E3C200A38 /* Pods-Unicorn.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Unicorn.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Unicorn/Pods-Unicorn.debug.xcconfig"; sourceTree = "<group>"; };
+		B5A61EF5EBB6B4DDD2DD8C74 /* libPods-Unicorn.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Unicorn.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +109,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D5A7F5A7EE589453EDC77B6E /* libPods-Unicorn.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -309,6 +314,8 @@
 			children = (
 				0CDB64712247CDB600ED48D0 /* Unicorn */,
 				0CDB64702247CDB600ED48D0 /* Products */,
+				F972DBCD2978F7905BB1ABFA /* Pods */,
+				D243C1CBCBAFA52D543B26D3 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -370,6 +377,23 @@
 			path = Component;
 			sourceTree = "<group>";
 		};
+		D243C1CBCBAFA52D543B26D3 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B5A61EF5EBB6B4DDD2DD8C74 /* libPods-Unicorn.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F972DBCD2978F7905BB1ABFA /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				42DB928C04CA865E3C200A38 /* Pods-Unicorn.debug.xcconfig */,
+				1501AEE6022D65928DA8578B /* Pods-Unicorn.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -377,6 +401,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0CDB64812247CDB700ED48D0 /* Build configuration list for PBXNativeTarget "Unicorn" */;
 			buildPhases = (
+				CC10405C9521E87D444672B9 /* [CP] Check Pods Manifest.lock */,
 				0CDB646B2247CDB600ED48D0 /* Sources */,
 				0CDB646C2247CDB600ED48D0 /* Frameworks */,
 				0CDB646D2247CDB600ED48D0 /* Resources */,
@@ -443,6 +468,27 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		CC10405C9521E87D444672B9 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Unicorn-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		0CDB646B2247CDB600ED48D0 /* Sources */ = {
@@ -616,6 +662,7 @@
 		};
 		0CDB64822247CDB700ED48D0 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 42DB928C04CA865E3C200A38 /* Pods-Unicorn.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -634,6 +681,7 @@
 		};
 		0CDB64832247CDB700ED48D0 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1501AEE6022D65928DA8578B /* Pods-Unicorn.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
