@@ -19,6 +19,7 @@ class Sticker {
             "y": viewModel.y,
             "w": viewModel.w,
             "h": viewModel.h,
+            "rotate": viewModel.rotate,
             "type": viewModel.type,
             ] as [String : Any]
         
@@ -60,6 +61,7 @@ class Sticker {
             "y": viewModel.y,
             "w": viewModel.w,
             "h": viewModel.h,
+            "rotate": viewModel.rotate,
             "bookId": viewModel.bookId!,
             "type": viewModel.type,
             "id": viewModel.id!
@@ -89,6 +91,7 @@ extension Sticker {
         var y: CGFloat
         var w: CGFloat
         var h: CGFloat
+        var rotate: CGFloat
         var type: Int
         var data: Data?
         var bookId: Int?

@@ -35,5 +35,53 @@
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Unicorn/Component/UNContentViewController.swift"
+            timestampString = "579233372.701387"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "171"
+            endingLineNumber = "171"
+            landmarkName = "viewDidAppear(_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Unicorn.UNTouchView) -&gt; () in closure #1 (Swift.Array&lt;Swift.Dictionary&lt;Swift.String, Any&gt;&gt;) -&gt; () in Unicorn.UNContentViewController.viewDidAppear(Swift.Bool) -&gt; ()"
+                  moduleName = "Unicorn"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/pjhubs/Documents/project/case/Unicorn-iOS/Unicorn/Component/UNContentViewController.swift"
+                  timestampString = "579232636.055756"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "171"
+                  endingLineNumber = "171"
+                  offsetFromSymbolStart = "43">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Unicorn.UNSticerView) -&gt; Swift.Bool in closure #1 (Unicorn.UNTouchView) -&gt; () in closure #1 (Swift.Array&lt;Swift.Dictionary&lt;Swift.String, Any&gt;&gt;) -&gt; () in Unicorn.UNContentViewController.viewDidAppear(Swift.Bool) -&gt; ()"
+                  moduleName = "Unicorn"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/pjhubs/Documents/project/case/Unicorn-iOS/Unicorn/Component/UNContentViewController.swift"
+                  timestampString = "579232636.058987"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "172"
+                  endingLineNumber = "172"
+                  offsetFromSymbolStart = "86">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

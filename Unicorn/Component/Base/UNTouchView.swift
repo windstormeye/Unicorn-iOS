@@ -10,7 +10,7 @@ import UIKit
 
 class UNTouchView: UIView {
     var touched: ((UNTouchView) -> Void)?
-    
+    var rotate: CGFloat = 0 
     var isSelected = false {
         didSet {
             if isSelected {
@@ -88,6 +88,7 @@ class UNTouchView: UIView {
     @objc
     fileprivate func rotateImage(gesture: UIRotationGestureRecognizer) {
         if gesture.state == .changed {
+            rotate = gesture.rotation
             transform = transform.rotated(by: gesture.rotation)
             gesture.rotation = 0
             

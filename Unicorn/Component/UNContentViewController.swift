@@ -50,6 +50,22 @@ class UNContentViewController: UIViewController {
             self.stickerTag += 1
             self.view.addSubview($0)
             self.stickerViews.append($0)
+            
+            $0.touched = { s in
+                let _ = self.stickerViews.filter({
+                    // TODO: 只判断文本会有些问题
+                    let s = s as! UNSticerView
+                    if $0.tag == s.tag {
+                        $0.x = s.x
+                        $0.y = s.y
+                        $0.width = s.width
+                        $0.height = s.height
+//                        $0.rotate = s.rotate
+                        return true
+                    }
+                    return false
+                })
+            }
         }
         
         // 底部功能栏
@@ -108,6 +124,7 @@ class UNContentViewController: UIViewController {
                                 $0.y = s.y
                                 $0.width = s.width
                                 $0.height = s.height
+//                                $0.rotate = s.rotate
                                 return true
                             }
                             return false
@@ -144,6 +161,7 @@ class UNContentViewController: UIViewController {
             for sticker in $0 {
                 let stickerView = UNSticerView(frame: CGRect(x: sticker["x"] as! CGFloat, y: sticker["y"] as! CGFloat, width: sticker["w"] as! CGFloat, height: sticker["h"] as! CGFloat))
                 stickerView.id = (sticker["id"] as! Int)
+                stickerView.rotate = sticker["rotate"] as! CGFloat
                 
                 if sticker["type"] as! Int == 1 {
                     stickerView.imgViewModel = UNSticerView.ImageStickerViewModel(image: UIImage(named: "贴纸" + String(sticker["defaultIndex"] as! Int))!)
@@ -151,13 +169,13 @@ class UNContentViewController: UIViewController {
                 
                 stickerView.touched = { s in
                     let _ = self.stickerViews.filter({
-                        // TODO: 只判断文本会有些问题
                         let s = s as! UNSticerView
                         if $0.id! == s.id! {
                             $0.x = s.x
                             $0.y = s.y
                             $0.width = s.width
                             $0.height = s.height
+                            $0.rotate = s.rotate
                             return true
                         }
                         return false
@@ -185,6 +203,7 @@ class UNContentViewController: UIViewController {
                                                   y: sticker.y,
                                                   w: sticker.width,
                                                   h: sticker.height,
+                                                  rotate: sticker.rotate,
                                                   type: sticker.stickerType.rawValue,
                                                   data: nil,
                                                   bookId: bookId!,
@@ -205,9 +224,10 @@ class UNContentViewController: UIViewController {
                                                   y: sticker.y,
                                                   w: sticker.width,
                                                   h: sticker.height,
+                                                  rotate: sticker.rotate,
                                                   type: sticker.stickerType.rawValue,
                                                   data: nil,
-                                                  bookId: nil,
+                                                  bookId: bookId!,
                                                   defaultIndex: sticker.defaultIndex)
                 Sticker.shared.create(viewModel: viewModel, complateHandler: {
                     sIndex += 1
