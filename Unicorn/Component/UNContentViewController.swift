@@ -10,15 +10,26 @@ import UIKit
 import Alamofire
 
 class UNContentViewController: UIViewController {
+    /// 当前编辑页面所属的手帐
     var bookId: Int?
-    
+    /// 贴纸集合
     private var stickerViews = [UNSticerView]()
+    /// 底部功能栏
     private var bottomCollectionView: PJLineCollectionView?
-    private var itemColors = [UIColor.black, UIColor.white, UIColor.red, UIColor.blue, UIColor.green]
+    /// 照片选择器
     private var imagePicker = UIImagePickerController()
+    /// 背景。放笔迹
     private var bgImageView = UIImageView()
+    /// 贴纸容器
     private var stickerComponentView = UNStickerComponentView()
+    /// 贴纸的起始 tag
     private var stickerTag = 1000
+    /// 渐变背景层
+    private var gradientLayer = CAGradientLayer()
+    /// 渐变背景层颜色集合
+    private var bgColors = [CGColor]() {
+        didSet { self.changeGradientLayer(colors: bgColors) }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,8 +37,18 @@ class UNContentViewController: UIViewController {
     }
     
     private func initView() {
+        // 设置背景颜色
         view.backgroundColor = .white
+        // 设置导航栏右按钮
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(done))
+        
+        // 初始化渐变层
+        self.view.layer.addSublayer(gradientLayer)
+        gradientLayer.frame = self.view.bounds
+        // 从左下角
+        gradientLayer.startPoint = CGPoint.init(x: 0, y: 0)
+        // 到右上角 进行渲染
+        gradientLayer.endPoint = CGPoint.init(x: 1, y: 1)
         
         // 画笔
         let brushView = UNBrushView(frame: CGRect(x: 0, y: topSafeAreaHeight, width: view.width, height: view.height - bottomSafeAreaHeight - 64 - topSafeAreaHeight))
@@ -37,19 +58,25 @@ class UNContentViewController: UIViewController {
         // 背景图片
         bgImageView.frame = CGRect(x: 0, y: brushView.y, width: view.width, height: brushView.height)
         view.addSubview(bgImageView)
+        // 添加
         let tap = UITapGestureRecognizer(target: self, action: #selector(hiddenView))
         bgImageView.isUserInteractionEnabled = true
         bgImageView.addGestureRecognizer(tap)
         
+        // 贴纸容器
         stickerComponentView = UNStickerComponentView(frame: CGRect(x: 0, y: view.height, width: view.width, height: 200))
+        // 先隐藏
         stickerComponentView.isHidden = true
         view.addSubview(stickerComponentView)
+        // 选择了贴纸后，通过闭包带出选择的贴纸
         stickerComponentView.sticker = {
             $0.viewDelegate = self
+            // 父视图居中
             $0.center = self.view.center
             $0.tag = self.stickerTag
             self.stickerTag += 1
             self.view.addSubview($0)
+            // 添加到贴纸集合中
             self.stickerViews.append($0)
         }
         
@@ -72,62 +99,64 @@ class UNContentViewController: UIViewController {
         
         collectionView.cellSelected = { cellIndex in
             switch cellIndex {
-            case 0:
-                self.stickerComponentView.isHidden = true
-                
-                brushView.isHidden = true
-                self.bgImageView.image = brushView.drawImage()
-                
-                self.present(self.colorBottomView, animated: true, completion: nil)
-            
-            case 1:
-                brushView.isHidden = true
-                self.bgImageView.image = brushView.drawImage()
-                
-                self.stickerComponentView.isHidden = false
-                UIView.animate(withDuration: 0.25, animations: {
-                    self.stickerComponentView.bottom = self.bottomCollectionView!.y
-                })
-                
-            case 2:
-                self.stickerComponentView.isHidden = true
-                
-                brushView.isHidden = true
-                self.bgImageView.image = brushView.drawImage()
-                
-                let vc = UNTextViewController()
-                self.present(vc, animated: true, completion: nil)
-                vc.complateHandler = { viewModel in
-                    let stickerLabel = UNSticerView(frame: CGRect(x: 150, y: 150, width: 100, height: 100))
-                    self.view.addSubview(stickerLabel)
-                    stickerLabel.textViewModel = viewModel
-                    self.stickerViews.append(stickerLabel)
-                }
-                
-            case 3:
-                self.stickerComponentView.isHidden = true
-                
-                brushView.isHidden = true
-                self.bgImageView.image = brushView.drawImage()
-                
-                self.imagePicker.delegate = self
-                self.imagePicker.sourceType = .photoLibrary
-                self.present(self.imagePicker, animated: true, completion: nil)
-                
-            case 4:
-                self.stickerComponentView.isHidden = true
-                
-                brushView.isHidden = false
-                self.bgImageView.image = nil
-                self.view.bringSubviewToFront(brushView)
-            default: break
+                // 背景
+                case 0:
+                    self.stickerComponentView.isHidden = true
+                    
+                    brushView.isHidden = true
+                    self.bgImageView.image = brushView.drawImage()
+                    
+                    self.present(self.colorBottomView, animated: true, completion: nil)
+                // 贴纸
+                case 1:
+                    brushView.isHidden = true
+                    self.bgImageView.image = brushView.drawImage()
+                    
+                    self.stickerComponentView.isHidden = false
+                    UIView.animate(withDuration: 0.25, animations: {
+                        self.stickerComponentView.bottom = self.bottomCollectionView!.y
+                    })
+                // 文字
+                case 2:
+                    self.stickerComponentView.isHidden = true
+                    
+                    brushView.isHidden = true
+                    self.bgImageView.image = brushView.drawImage()
+                    
+                    let vc = UNTextViewController()
+                    self.present(vc, animated: true, completion: nil)
+                    vc.complateHandler = { viewModel in
+                        let stickerLabel = UNSticerView(frame: CGRect(x: 150, y: 150, width: 100, height: 100))
+                        self.view.addSubview(stickerLabel)
+                        stickerLabel.textViewModel = viewModel
+                        self.stickerViews.append(stickerLabel)
+                    }
+                // 照片
+                case 3:
+                    self.stickerComponentView.isHidden = true
+                    
+                    brushView.isHidden = true
+                    self.bgImageView.image = brushView.drawImage()
+                    
+                    self.imagePicker.delegate = self
+                    self.imagePicker.sourceType = .photoLibrary
+                    self.imagePicker.allowsEditing = true
+                    self.present(self.imagePicker, animated: true, completion: nil)
+                // 画笔
+                case 4:
+                    self.stickerComponentView.isHidden = true
+                    
+                    brushView.isHidden = false
+                    self.bgImageView.image = nil
+                    self.view.bringSubviewToFront(brushView)
+                default: break
             }
         }
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
+        // 先拉取已有的贴纸
         Sticker.shared.get(bookId: bookId!, complateHandler: {
             for sticker in $0 {
                 DispatchQueue.main.async {
@@ -176,64 +205,36 @@ class UNContentViewController: UIViewController {
         }
     }
     
+    /// 改变背景渐变层
+    func changeGradientLayer(colors: [CGColor]) {
+        var numbers = [NSNumber]()
+        var numberSum: CGFloat = 0
+        let temp = CGFloat(1) / CGFloat(colors.count)
+        for index in 0..<colors.count {
+            numberSum = 1 - temp * CGFloat(index)
+            numbers.append(NSNumber(value: Float(numberSum)))
+        }
+        
+        gradientLayer.locations = numbers.reversed()
+        gradientLayer.colors = colors
+    }
+    
+    /// 完成编辑
     @objc
     private func done() {
-        
+        // 开启某个大小的上下文空间
         UIGraphicsBeginImageContextWithOptions(CGSize(width: view.width, height: view.height - bottomCollectionView!.height), false, UIScreen.main.scale)
+        // 把 view.layer 渲染进当前打开的上下文空间
         view.layer.render(in: UIGraphicsGetCurrentContext()!)
+        // 从上下文空间中获取 UIImage
         let bgImage = UIGraphicsGetImageFromCurrentImageContext()
+        // 关闭
         UIGraphicsEndImageContext()
         
         saveImage(image: bgImage!)
-        
-//        var sIndex = 0
-//        for sticker in stickerViews {
-//            if sticker.id != nil {
-//                let viewModel = Sticker.ViewModel(id: sticker.id!,
-//                                                  x: sticker.x,
-//                                                  y: sticker.y,
-//                                                  w: sticker.width,
-//                                                  h: sticker.height,
-//                                                  rotate: sticker.rotate,
-//                                                  type: sticker.stickerType.rawValue,
-//                                                  data: nil,
-//                                                  bookId: bookId!,
-//                                                  defaultIndex: sticker.defaultIndex)
-//                Sticker.shared.update(viewModel: viewModel, complateHandler: {
-//                    sIndex += 1
-//                    if sIndex == self.stickerViews.count {
-//                        DispatchQueue.main.async {
-//                            self.navigationController?.popViewController(animated: true)
-//                        }
-//                    }
-//                }) {
-//                    print($0)
-//                }
-//            } else {
-//                let viewModel = Sticker.ViewModel(id: nil,
-//                                                  x: sticker.x,
-//                                                  y: sticker.y,
-//                                                  w: sticker.width,
-//                                                  h: sticker.height,
-//                                                  rotate: sticker.rotate,
-//                                                  type: sticker.stickerType.rawValue,
-//                                                  data: nil,
-//                                                  bookId: bookId!,
-//                                                  defaultIndex: sticker.defaultIndex)
-//                Sticker.shared.create(viewModel: viewModel, complateHandler: {
-//                    sIndex += 1
-//                    if sIndex == self.stickerViews.count {
-//                        DispatchQueue.main.async {
-//                            self.navigationController?.popViewController(animated: true)
-//                        }
-//                    }
-//                }) {
-//                    print($0)
-//                }
-//            }
-//        }
     }
     
+    /// 隐藏/显示 贴纸容器
     @objc
     fileprivate func hiddenView() {
         stickerComponentView.isHidden = false
@@ -250,7 +251,7 @@ class UNContentViewController: UIViewController {
     private var colorBottomView: UNBottomColorViewController {
         get {
             let colorPopover = UNBottomColorViewController()
-            colorPopover.colors = itemColors
+            colorPopover.colors = [UIColor.black, UIColor.white, UIColor.red, UIColor.blue, UIColor.green]
             colorPopover.currentColor = self.view.backgroundColor!
             colorPopover.preferredContentSize = CGSize(width: 200, height: 280)
             colorPopover.modalPresentationStyle = .popover
@@ -262,8 +263,14 @@ class UNContentViewController: UIViewController {
             colorPopoverPVC?.delegate = self
             colorPopoverPVC?.backgroundColor = .white
             
-            colorPopover.colorChange = { color in
-                self.view.backgroundColor = color
+            // 颜色轮盘
+            colorPopover.colorChange = {
+                self.view.backgroundColor = $0
+                self.bgColors.removeAll()
+            }
+            // 底部颜色栏
+            colorPopover.bottomColorChange = {
+                self.bgColors.append($0)
             }
             
             return colorPopover
@@ -278,6 +285,7 @@ extension UNContentViewController {
         let touchPoint = touches.first?.location(in: view)
         var isSelected = false
         
+        // 判断是否选中，来决定是否显示“选中框”
         for stickerView in stickerViews {
             if stickerView.frame.contains(touchPoint!) && !isSelected {
                 stickerView.isSelected = true
@@ -297,14 +305,17 @@ extension UNContentViewController: UIPopoverPresentationControllerDelegate {
 
 
 extension UNContentViewController: UIImagePickerControllerDelegate {
+    /// 从图片选择器中获取选择到的图片
     func imagePickerController(_ picker: UIImagePickerController,
                                didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
+        // 获取到编辑后的图片
+        let image = info[UIImagePickerController.InfoKey.editedImage] as? UIImage
         if image != nil {
             let wh = image!.size.width / image!.size.height
             let sticker = UNSticerView(frame: CGRect(x: 150, y: 150, width: 100, height: 100 * wh))
             self.view.addSubview(sticker)
             sticker.imgViewModel = UNSticerView.ImageStickerViewModel(image: image!)
+            // 添加到贴纸集合中
             self.stickerViews.append(sticker)
     
             picker.dismiss(animated: true, completion: nil)

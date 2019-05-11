@@ -15,6 +15,7 @@ class UNBottomColorViewController: UIViewController {
         }
     }
     var colorChange: ((UIColor) -> Void)?
+    var bottomColorChange: ((CGColor) -> Void)?
     var currentColor: UIColor?
     
     private var colorCollectionView: PJLineCollectionView?
@@ -48,7 +49,7 @@ class UNBottomColorViewController: UIViewController {
         colorCollectionView.viewColorModels = colors
         colorCollectionView.cellSelected = { selectedIndex in
             guard self.colors != nil else { return }
-            self.colorChange?(self.colors![selectedIndex])
+            self.bottomColorChange?(self.colors![selectedIndex].cgColor)
         }
         view.addSubview(colorCollectionView)
     }

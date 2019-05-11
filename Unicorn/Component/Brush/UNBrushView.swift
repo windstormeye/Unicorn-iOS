@@ -77,7 +77,7 @@ class UNBrushView: UIView {
         
         /// 颜色选择
         let collectionViewLayout = UICollectionViewFlowLayout()
-        let itemW = bottomView.height
+        let itemW = bottomView.height * 0.7
         let itemCount = CGFloat(5)
         let innerW = (screenWidth - itemCount * 50) / itemCount
         collectionViewLayout.itemSize = CGSize(width: itemW , height: itemW)
@@ -93,6 +93,12 @@ class UNBrushView: UIView {
         bottomView.addSubview(collectionView)
         
         collectionView.cellSelected = { cellIndex in
+            if self.brushColor == collectionView.viewColorModels![cellIndex] {
+                self.brushWidth += 1
+            } else {
+                self.brushWidth = 3
+            }
+            
             self.brushColor = collectionView.viewColorModels![cellIndex]
         }
     }

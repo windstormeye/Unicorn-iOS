@@ -94,6 +94,7 @@ extension User {
 }
 
 extension User {
+    /// 保持到沙盒中
     func saveToSandBox() {
         let encoder = JSONEncoder()
         if let BeerData = try? encoder.encode(self.viewModel) {
@@ -108,7 +109,7 @@ extension User {
         }
     }
     
-    
+    /// 从沙盒中读取
     func readBySandBox() -> ViewModel? {
         let url = URL.init(fileURLWithPath: User.userAccountPath).appendingPathComponent("userData.data")
         do {
