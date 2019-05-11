@@ -9,7 +9,7 @@
 import UIKit
 
 class UNTouchView: UIView {
-    var rotate: CGFloat = 0 
+    private var previousRotation: CGFloat = 0
     var isSelected = false {
         didSet {
             if isSelected {
@@ -57,6 +57,11 @@ class UNTouchView: UIView {
         let panGesture = UIPanGestureRecognizer(target: self, action: .pan)
         panGesture.delegate = self
         addGestureRecognizer(panGesture)
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: .doubleTap)
+        // 双击
+        tapGesture.numberOfTapsRequired = 2
+        addGestureRecognizer(tapGesture)
     }
     
     private func initLayout() {
@@ -85,7 +90,6 @@ class UNTouchView: UIView {
     @objc
     fileprivate func rotateImage(gesture: UIRotationGestureRecognizer) {
         if gesture.state == .changed {
-            rotate = gesture.rotation
             transform = transform.rotated(by: gesture.rotation)
             gesture.rotation = 0
         }
@@ -99,6 +103,15 @@ class UNTouchView: UIView {
             gesture.setTranslation(.zero, in: superview)
         }
     }
+    
+    @objc
+    fileprivate func doubleTapGesture(tap: UITapGestureRecognizer) {
+        if tap.state == .ended {
+            let ratation = CGFloat(Double.pi / 2.0)
+            transform = CGAffineTransform(rotationAngle: previousRotation + ratation)
+            previousRotation += ratation
+        }
+    }
 }
 
 private extension Selector {
@@ -106,6 +119,7 @@ private extension Selector {
     static let pinch = #selector(UNSticerView.pinchImage(gesture:))
     static let rotate = #selector(UNSticerView.rotateImage(gesture:))
     static let pan = #selector(UNSticerView.panImage(gesture:))
+    static let doubleTap = #selector(UNSticerView.doubleTapGesture(tap:))
 }
 
 extension UNTouchView: UIGestureRecognizerDelegate {
