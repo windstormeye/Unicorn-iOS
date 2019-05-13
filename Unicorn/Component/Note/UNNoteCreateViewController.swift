@@ -2,7 +2,7 @@
 //  UNNoteCreateViewController.swift
 //  Unicorn
 //
-//  Created by PJHubs on 2019/5/10.
+//  Created by YiYi on 2019/5/10.
 //  Copyright © 2019 PJHubs. All rights reserved.
 //
 
@@ -12,7 +12,7 @@ class UNNoteCreateViewController: UIViewController {
 
     private var noteView = UIView()
     private var noteTitleLabel = UILabel()
-    private var bottomCollectionView: PJLineCollectionView?
+    private var bottomCollectionView: UNLineCollectionView?
     private var noteTitleString = "" {
         didSet { noteTitleLabel.text = noteTitleString }
     }
@@ -47,7 +47,7 @@ class UNNoteCreateViewController: UIViewController {
         collectionViewLayout.minimumInteritemSpacing = 10
         collectionViewLayout.scrollDirection = .horizontal
         
-        let collectionView = PJLineCollectionView(frame: CGRect(x: 0, y: view.height - bottomSafeAreaHeight - 64, width: view.width, height: 64), collectionViewLayout: collectionViewLayout)
+        let collectionView = UNLineCollectionView(frame: CGRect(x: 0, y: view.height - bottomSafeAreaHeight - 64, width: view.width, height: 64), collectionViewLayout: collectionViewLayout)
         collectionView.backgroundColor = .darkGray
         collectionView.viewModels = ["标题", "颜色"]
         bottomCollectionView = collectionView

@@ -1,14 +1,14 @@
 //
-//  PJLineCollectionViewLayout.swift
+//  UNLineCollectionViewLayout.swift
 //  WWDC19
 //
-//  Created by PJHubs on 2019/3/16.
-//  Copyright © 2019 PJHubs. All rights reserved.
+//  Created by YiYi on 2019/3/16.
+//  Copyright © 2019 YiYi. All rights reserved.
 //
 
 import UIKit
 
-class PJLineCollectionViewLayout: UICollectionViewLayout {
+class UNLineCollectionViewLayout: UICollectionViewLayout {
     override init() {
         super.init()
         let collectionViewLayout = UICollectionViewFlowLayout()

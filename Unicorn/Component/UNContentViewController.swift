@@ -2,8 +2,8 @@
 //  UNContentViewController.swift
 //  Unicorn
 //
-//  Created by PJHubs on 2019/3/25.
-//  Copyright © 2019 PJHubs. All rights reserved.
+//  Created by YiYi on 2019/3/25.
+//  Copyright © 2019 YiYi. All rights reserved.
 //
 
 import UIKit
@@ -15,7 +15,7 @@ class UNContentViewController: UIViewController {
     /// 贴纸集合
     private var stickerViews = [UNSticerView]()
     /// 底部功能栏
-    private var bottomCollectionView: PJLineCollectionView?
+    private var bottomCollectionView: UNLineCollectionView?
     /// 照片选择器
     private var imagePicker = UIImagePickerController()
     /// 背景。放笔迹
@@ -40,7 +40,7 @@ class UNContentViewController: UIViewController {
         // 设置背景颜色
         view.backgroundColor = .white
         // 设置导航栏右按钮
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(done))
+        navigationItem.rightBarButtonItems = [UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(done)), UIBarButtonItem(barButtonSystemItem: .reply, target: self, action: #selector(share))]
         
         // 初始化渐变层
         self.view.layer.addSublayer(gradientLayer)
@@ -91,7 +91,7 @@ class UNContentViewController: UIViewController {
         collectionViewLayout.scrollDirection = .horizontal
         collectionViewLayout.sectionInset = UIEdgeInsets(top: 0, left: innerW / 2, bottom: 0, right: innerW / 2)
         
-        let collectionView = PJLineCollectionView(frame: CGRect(x: 0, y: view.height - bottomSafeAreaHeight - 64, width: view.width, height: 64 + bottomSafeAreaHeight), collectionViewLayout: collectionViewLayout)
+        let collectionView = UNLineCollectionView(frame: CGRect(x: 0, y: view.height - bottomSafeAreaHeight - 64, width: view.width, height: 64 + bottomSafeAreaHeight), collectionViewLayout: collectionViewLayout)
         collectionView.backgroundColor = UIColor(red: 54/255, green: 149/255, blue: 1, alpha: 1)
         self.bottomCollectionView = collectionView
         collectionView.lineType = .icon
@@ -243,6 +243,33 @@ class UNContentViewController: UIViewController {
         }) {
             if $0 {
                 self.stickerComponentView.isHidden = true
+            }
+        }
+    }
+    
+    /// 分享
+    @objc
+    fileprivate func share() {
+        // 开启某个大小的上下文空间
+        UIGraphicsBeginImageContextWithOptions(CGSize(width: view.width, height: view.height - bottomCollectionView!.height), false, UIScreen.main.scale)
+        // 把 view.layer 渲染进当前打开的上下文空间
+        view.layer.render(in: UIGraphicsGetCurrentContext()!)
+        // 从上下文空间中获取 UIImage
+        let bgImage = UIGraphicsGetImageFromCurrentImageContext()
+        // 关闭
+        UIGraphicsEndImageContext()
+        
+        
+        
+        let items = [ bgImage ]
+        let toVC = UIActivityViewController(activityItems: items as [Any],
+                                            applicationActivities: nil)
+        present(toVC, animated: true, completion: nil)
+        
+        
+        toVC.completionWithItemsHandler = {(_ activityType: UIActivity.ActivityType?, _ completed: Bool, _ returnedItems: [Any]?, _ activityError: Error?) -> Void in
+            if completed {
+                print("分享成功")
             }
         }
     }

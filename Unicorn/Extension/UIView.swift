@@ -2,18 +2,18 @@
 //  UIView.swift
 //  Unicorn
 //
-//  Created by PJHubs on 2019/3/25.
-//  Copyright © 2019 PJHubs. All rights reserved.
+//  Created by YiYi on 2019/3/25.
+//  Copyright © 2019 YiYi. All rights reserved.
 //
 
 import UIKit
 
 extension UIView {
     
-    static private let PJSCREEN_SCALE = UIScreen.main.scale
+    static private let UNSCREEN_SCALE = UIScreen.main.scale
     
     private func getPixintegral(pointValue: CGFloat) -> CGFloat {
-        return round(pointValue * UIView.PJSCREEN_SCALE) / UIView.PJSCREEN_SCALE
+        return round(pointValue * UIView.UNSCREEN_SCALE) / UIView.UNSCREEN_SCALE
     }
     
     public var x: CGFloat {

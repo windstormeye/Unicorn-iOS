@@ -2,8 +2,8 @@
 //  UNTextViewController.swift
 //  Unicorn
 //
-//  Created by PJHubs on 2019/4/2.
-//  Copyright © 2019 PJHubs. All rights reserved.
+//  Created by YiYi on 2019/4/2.
+//  Copyright © 2019 YiYi. All rights reserved.
 //
 
 import UIKit
@@ -13,7 +13,7 @@ class UNTextViewController: UIViewController {
     var textViewHeight: CGFloat?
     
     private var textView = UITextView()
-    private var bottomCollectionView: PJLineCollectionView?
+    private var bottomCollectionView: UNLineCollectionView?
     private var itemImageNames = ["字体", "大小", "颜色"]
     private var itemColors = [UIColor.black, UIColor.white, UIColor.red, UIColor.blue, UIColor.green]
     private var textFonts = ["FZLuXunTiS-R-GB",
@@ -73,7 +73,7 @@ class UNTextViewController: UIViewController {
         collectionViewLayout.scrollDirection = .horizontal
         collectionViewLayout.sectionInset = UIEdgeInsets(top: 0, left: innerW / 2, bottom: 0, right: innerW / 2)
         
-        let collectionView = PJLineCollectionView(frame: CGRect(x: 0, y: view.height - bottomSafeAreaHeight - 64, width: view.width, height: 64), collectionViewLayout: collectionViewLayout)
+        let collectionView = UNLineCollectionView(frame: CGRect(x: 0, y: view.height - bottomSafeAreaHeight - 64, width: view.width, height: 64), collectionViewLayout: collectionViewLayout)
         collectionView.backgroundColor = .darkGray
         self.bottomCollectionView = collectionView
         collectionView.viewModels = itemImageNames

@@ -2,8 +2,8 @@
 //  UNBrushView.swift
 //  Unicorn
 //
-//  Created by PJHubs on 2019/4/28.
-//  Copyright © 2019 PJHubs. All rights reserved.
+//  Created by YiYi on 2019/4/28.
+//  Copyright © 2019 YiYi. All rights reserved.
 //
 
 import UIKit
@@ -86,7 +86,7 @@ class UNBrushView: UIView {
         collectionViewLayout.scrollDirection = .horizontal
         collectionViewLayout.sectionInset = UIEdgeInsets(top: 0, left: innerW / 2, bottom: 0, right: innerW / 2)
         
-        let collectionView = PJLineCollectionView(frame: CGRect(x: redoButton.right, y: 0, width: bottomView.width - redoButton.right, height: bottomView.height), collectionViewLayout: collectionViewLayout)
+        let collectionView = UNLineCollectionView(frame: CGRect(x: redoButton.right, y: 0, width: bottomView.width - redoButton.right, height: bottomView.height), collectionViewLayout: collectionViewLayout)
         collectionView.backgroundColor = .clear
         collectionView.lineType = .color
         collectionView.viewColorModels = [.black, .red, .gray, .green, .purple, .blue]

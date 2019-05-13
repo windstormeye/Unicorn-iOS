@@ -2,8 +2,8 @@
 //  UNNoteViewController.swift
 //  Unicorn
 //
-//  Created by PJHubs on 2019/5/10.
-//  Copyright © 2019 PJHubs. All rights reserved.
+//  Created by YiYi on 2019/5/10.
+//  Copyright © 2019 YiYi. All rights reserved.
 //
 
 import UIKit
@@ -11,7 +11,7 @@ import UIKit
 class UNNoteViewController: UIViewController {
 
     private var coverIds = [Int]()
-    private var collectionView: PJLineCollectionView?
+    private var collectionView: UNLineCollectionView?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,7 +36,7 @@ class UNNoteViewController: UIViewController {
         collectionViewLayout.scrollDirection = .vertical
         collectionViewLayout.sectionInset = UIEdgeInsets(top: innerW / 2, left: innerW / 2, bottom: 20, right: innerW / 2)
         
-        let collectionView = PJLineCollectionView(frame: CGRect(x: 0, y: navigationHeight, width: view.width, height: view.height - navigationHeight - bottomSafeAreaHeight), collectionViewLayout: collectionViewLayout)
+        let collectionView = UNLineCollectionView(frame: CGRect(x: 0, y: navigationHeight, width: view.width, height: view.height - navigationHeight - bottomSafeAreaHeight), collectionViewLayout: collectionViewLayout)
         self.collectionView = collectionView
         collectionView.backgroundColor = .clear
         collectionView.lineType = .cover

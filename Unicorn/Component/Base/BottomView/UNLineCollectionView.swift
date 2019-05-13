@@ -1,17 +1,17 @@
 //
-//  PJShowContentCollectionView.swift
+//  UNShowContentCollectionView.swift
 //  WWDC19
 //
-//  Created by PJHubs on 2019/3/16.
-//  Copyright © 2019 PJHubs. All rights reserved.
+//  Created by YiYi on 2019/3/16.
+//  Copyright © 2019 YiYi. All rights reserved.
 //
 
 import UIKit
 
-class PJLineCollectionView: UICollectionView {
-    private let cellIdentifier = "PJLineCollectionViewCell"
+class UNLineCollectionView: UICollectionView {
+    private let cellIdentifier = "UNLineCollectionViewCell"
     
-    var viewDelegate: PJLineCollectionViewDelegate?
+    var viewDelegate: UNLineCollectionViewDelegate?
     var viewModels: [String]? {didSet{ reloadData()}}
     var viewColorModels: [UIColor]? {didSet{ reloadData()}}
     var cellCenterXs = [CGFloat]()
@@ -38,19 +38,19 @@ class PJLineCollectionView: UICollectionView {
         delegate = self
         dataSource = self
         
-        register(PJLineCollectionViewCell.self,
-                 forCellWithReuseIdentifier: "PJLineCollectionViewCell")
+        register(UNLineCollectionViewCell.self,
+                 forCellWithReuseIdentifier: "UNLineCollectionViewCell")
     }
 }
 
-extension PJLineCollectionView: UICollectionViewDelegate {
+extension UNLineCollectionView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView,
                         didSelectItemAt indexPath: IndexPath) {
         cellSelected?(indexPath.row)
     }
 }
 
-extension PJLineCollectionView: UICollectionViewDataSource {
+extension UNLineCollectionView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView,
                         numberOfItemsInSection section: Int) -> Int {
         switch lineType {
@@ -71,7 +71,7 @@ extension PJLineCollectionView: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView,
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PJLineCollectionViewCell", for: indexPath) as! PJLineCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "UNLineCollectionViewCell", for: indexPath) as! UNLineCollectionViewCell
         cell.type = lineType
         
         switch lineType {
@@ -94,7 +94,7 @@ extension PJLineCollectionView: UICollectionViewDataSource {
     }
 }
 
-extension PJLineCollectionView {
+extension UNLineCollectionView {
     enum LineType {
         case text
         case color
@@ -103,11 +103,11 @@ extension PJLineCollectionView {
     }
 }
 
-protocol PJLineCollectionViewDelegate {
+protocol UNLineCollectionViewDelegate {
     func collectionViewCellLongPress(_ cellIndex: Int)
 }
 
-extension PJLineCollectionViewDelegate {
+extension UNLineCollectionViewDelegate {
     func collectionViewCellLongPress(_ cellIndex: Int) {}
 }
 

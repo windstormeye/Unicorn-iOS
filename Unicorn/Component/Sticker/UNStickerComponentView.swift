@@ -2,8 +2,8 @@
 //  UNStickerComponentView.swift
 //  Unicorn
 //
-//  Created by PJHubs on 2019/4/29.
-//  Copyright © 2019 PJHubs. All rights reserved.
+//  Created by YiYi on 2019/4/29.
+//  Copyright © 2019 YiYi. All rights reserved.
 //
 
 import UIKit
@@ -33,7 +33,7 @@ class UNStickerComponentView: UIView {
         collectionViewLayout.scrollDirection = .vertical
         collectionViewLayout.sectionInset = UIEdgeInsets(top: innerW / 2, left: innerW / 2, bottom: 0, right: innerW / 2)
         
-        let collectionView = PJLineCollectionView(frame: CGRect(x: 0, y: 0, width: width, height: height), collectionViewLayout: collectionViewLayout)
+        let collectionView = UNLineCollectionView(frame: CGRect(x: 0, y: 0, width: width, height: height), collectionViewLayout: collectionViewLayout)
         collectionView.backgroundColor = .clear
         collectionView.lineType = .icon
         collectionView.iconTitle = "贴纸"

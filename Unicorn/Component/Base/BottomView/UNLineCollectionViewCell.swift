@@ -1,18 +1,18 @@
 //
-//  PJLineCollectionViewCell.swift
+//  UNLineCollectionViewCell.swift
 //  WWDC19
 //
-//  Created by PJHubs on 2019/3/16.
-//  Copyright © 2019 PJHubs. All rights reserved.
+//  Created by YiYi on 2019/3/16.
+//  Copyright © 2019 YiYi. All rights reserved.
 //
 
 import UIKit
 
-class PJLineCollectionViewCell: UICollectionViewCell {
+class UNLineCollectionViewCell: UICollectionViewCell {
     var viewModel = "" {didSet { setViewModel()}}
     var viewColorModel: UIColor? {didSet{backgroundColor = viewColorModel}}
     var image: UIImage? { didSet{iconImageView?.image = image }}
-    var type: PJLineCollectionView.LineType = .text {didSet{setType()}}
+    var type: UNLineCollectionView.LineType = .text {didSet{setType()}}
     
     private var tipsLabel: UILabel?
     private var iconImageView: UIImageView?

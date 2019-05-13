@@ -2,8 +2,8 @@
 //  UNBottomColorViewController.swift
 //  Unicorn
 //
-//  Created by PJHubs on 2019/4/5.
-//  Copyright © 2019 PJHubs. All rights reserved.
+//  Created by YiYi on 2019/4/5.
+//  Copyright © 2019 YiYi. All rights reserved.
 //
 
 import UIKit
@@ -18,7 +18,7 @@ class UNBottomColorViewController: UIViewController {
     var bottomColorChange: ((CGColor) -> Void)?
     var currentColor: UIColor?
     
-    private var colorCollectionView: PJLineCollectionView?
+    private var colorCollectionView: UNLineCollectionView?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,7 +42,7 @@ class UNBottomColorViewController: UIViewController {
         collectionViewLayout.scrollDirection = .horizontal
         collectionViewLayout.sectionInset = UIEdgeInsets(top: 0, left: innerW / 2, bottom: 0, right: innerW / 2)
         
-        let colorCollectionView = PJLineCollectionView(frame: CGRect(x: 0, y: colorView.bottom, width: 200, height: 30), collectionViewLayout: collectionViewLayout)
+        let colorCollectionView = UNLineCollectionView(frame: CGRect(x: 0, y: colorView.bottom, width: 200, height: 30), collectionViewLayout: collectionViewLayout)
         colorCollectionView.backgroundColor = .white
         self.colorCollectionView = colorCollectionView
         colorCollectionView.lineType = .color

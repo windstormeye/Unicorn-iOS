@@ -2,8 +2,8 @@
 //  Define.swift
 //  Unicorn
 //
-//  Created by PJHubs on 2019/4/2.
-//  Copyright © 2019 PJHubs. All rights reserved.
+//  Created by YiYi on 2019/4/2.
+//  Copyright © 2019 YiYi. All rights reserved.
 //
 
 import UIKit
