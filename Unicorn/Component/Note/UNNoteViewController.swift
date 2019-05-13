@@ -24,7 +24,7 @@ class UNNoteViewController: UIViewController {
         navigationController?.navigationBar.tintColor = .black
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addNote))
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "profile"), style: .plain, target: self, action: #selector(profile))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .rewind, target: self, action: #selector(logout))
         
         let collectionViewLayout = UICollectionViewFlowLayout()
         let itemW = view.width * 0.4
@@ -63,6 +63,8 @@ class UNNoteViewController: UIViewController {
             var titles = [String]()
             var colors = [UIColor]()
             
+            self.coverIds.removeAll()
+            
             for d: Dictionary in $0 {
                 titles.append(d["coverTitle"] as! String)
                 self.coverIds.append(d["id"] as! Int)
@@ -89,7 +91,11 @@ class UNNoteViewController: UIViewController {
     }
     
     @objc
-    private func profile() {
-        
+    private func logout() {
+        User.shared.logout {
+            DispatchQueue.main.async {
+                self.present(UIStoryboard(name: "UNUserLoginViewController", bundle: nil).instantiateViewController(withIdentifier: "UNUserLoginViewController"), animated: true, completion: nil)
+            }
+        }
     }
 }

@@ -25,16 +25,26 @@ class Network {
         
         
         let url = URL(string: tempUrlString)!
-        let request = URLRequest(url: url)
-
+        
+        var request = URLRequest(url: url)
+//        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        if User.shared.viewModel.token != nil {
+            request.setValue("Bearer " + User.shared.viewModel.token!, forHTTPHeaderField: "Authorization")
+        }
+//        request.httpBody = try! JSONSerialization.data(withJSONObject: params, options: .prettyPrinted)
+        
         let session = URLSession(configuration: URLSessionConfiguration.default)
         
         let task = session.dataTask(with: request) { (responseData, urlResponseData, error) in
 //            guard error != nil else { failedHanler(error) }
 
             // 加上 do-catch
-            let resDict = try! JSONSerialization.jsonObject(with: responseData!, options: .allowFragments)
-            complateHandler(resDict)
+            if responseData?.count == 0 {
+                complateHandler(0)
+            } else {
+                let resDict = try! JSONSerialization.jsonObject(with: responseData!, options: .allowFragments)
+                complateHandler(resDict)
+            }
         }
         task.resume()
     }

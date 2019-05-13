@@ -74,8 +74,16 @@ class User {
         }
     }
     
-    func logout() {
-        
+    func logout(complateHandler: @escaping (() -> Void)) {
+        Network.shared.get(urlString: "http://localhost:8080/api/user/logout",
+                           params: [:],
+                           complateHandler: { (data) in
+                            self.viewModel = ViewModel(uid: nil, token: nil, nickname: nil, phoneNumber: nil, password: nil)
+                            self.saveToSandBox()
+                            complateHandler()
+        }) {
+            print($0!)
+        }
     }
     
     func update() {
