@@ -2,7 +2,7 @@
 //  StickerService.swift
 //  Unicorn
 //
-//  Created by YiYi on 2019/5/10.
+//  Created by Yi on 2019/5/10.
 //  Copyright © 2019 YiYi. All rights reserved.
 //
 

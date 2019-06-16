@@ -2,14 +2,14 @@
 //  UNStickerComponentView.swift
 //  Unicorn
 //
-//  Created by YiYi on 2019/4/29.
+//  Created by Yi on 2019/4/29.
 //  Copyright © 2019 YiYi. All rights reserved.
 //
 
 import UIKit
 
 class UNStickerComponentView: UIView {
-    var sticker: ((UNSticerView) -> Void)?
+    var sticker: ((UNStickerView) -> Void)?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -20,6 +20,7 @@ class UNStickerComponentView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // “贴纸”界面初始化
     private func initView() {
         backgroundColor = .lightGray
         
@@ -31,22 +32,23 @@ class UNStickerComponentView: UIView {
         collectionViewLayout.minimumLineSpacing = innerW
         collectionViewLayout.minimumInteritemSpacing = 10
         collectionViewLayout.scrollDirection = .vertical
+        // 距离四周的间距
         collectionViewLayout.sectionInset = UIEdgeInsets(top: innerW / 2, left: innerW / 2, bottom: 0, right: innerW / 2)
         
         let collectionView = UNLineCollectionView(frame: CGRect(x: 0, y: 0, width: width, height: height), collectionViewLayout: collectionViewLayout)
         collectionView.backgroundColor = .clear
         collectionView.lineType = .icon
+        // iconTitle里设置默认为“home-”开头，但这里设为“贴纸”开头的 图（文件夹Assets里的资源）
         collectionView.iconTitle = "贴纸"
-        collectionView.iconCount = 10
+        collectionView.iconCount = 17
         addSubview(collectionView)
         
         collectionView.cellSelected = { cellIndex in
             let stickerImage = UIImage(named: collectionView.iconTitle + "\(cellIndex)")
-            let sticker = UNSticerView()
+            let sticker = UNStickerView()
             sticker.width = 100
             sticker.height = 100
-            sticker.defaultIndex = cellIndex
-            sticker.imgViewModel = UNSticerView.ImageStickerViewModel(image: stickerImage!)
+            sticker.imgViewModel = UNStickerView.ImageStickerViewModel(image: stickerImage!)
             self.sticker?(sticker)
         }
         

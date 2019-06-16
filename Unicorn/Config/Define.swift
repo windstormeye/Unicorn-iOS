@@ -2,7 +2,7 @@
 //  Define.swift
 //  Unicorn
 //
-//  Created by YiYi on 2019/4/2.
+//  Created by Yi on 2019/4/2.
 //  Copyright © 2019 YiYi. All rights reserved.
 //
 

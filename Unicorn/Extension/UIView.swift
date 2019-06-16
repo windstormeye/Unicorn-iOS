@@ -2,7 +2,7 @@
 //  UIView.swift
 //  Unicorn
 //
-//  Created by YiYi on 2019/3/25.
+//  Created by Yi on 2019/3/25.
 //  Copyright © 2019 YiYi. All rights reserved.
 //
 
