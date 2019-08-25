@@ -2,8 +2,8 @@
 //  UNContentViewController.swift
 //  Unicorn
 //
-//  Created by YiYi on 2019/3/25.
-//  Copyright © 2019 YiYi. All rights reserved.
+//  Created by PJHubs on 2019/3/25.
+//  Copyright © 2019 PJHubs. All rights reserved.
 //
 
 import UIKit
@@ -13,7 +13,7 @@ class UNContentViewController: UIViewController {
     /// 当前编辑页面所属的手帐
     var bookId: Int?
     /// 贴纸集合
-    private var stickerViews = [UNSticerView]()
+    private var stickerViews = [UNStickerView]()
     /// 底部功能栏
     private var bottomCollectionView: UNLineCollectionView?
     /// 照片选择器
@@ -63,7 +63,7 @@ class UNContentViewController: UIViewController {
         bgImageView.isUserInteractionEnabled = true
         bgImageView.addGestureRecognizer(tap)
         
-        // 贴纸容器
+        // 贴纸容器 界面实例化
         stickerComponentView = UNStickerComponentView(frame: CGRect(x: 0, y: view.height, width: view.width, height: 200))
         // 先隐藏
         stickerComponentView.isHidden = true
@@ -89,6 +89,7 @@ class UNContentViewController: UIViewController {
         collectionViewLayout.minimumLineSpacing = innerW
         collectionViewLayout.minimumInteritemSpacing = 10
         collectionViewLayout.scrollDirection = .horizontal
+        // 距离四周的间距
         collectionViewLayout.sectionInset = UIEdgeInsets(top: 0, left: innerW / 2, bottom: 0, right: innerW / 2)
         
         let collectionView = UNLineCollectionView(frame: CGRect(x: 0, y: view.height - bottomSafeAreaHeight - 64, width: view.width, height: 64 + bottomSafeAreaHeight), collectionViewLayout: collectionViewLayout)
@@ -97,6 +98,7 @@ class UNContentViewController: UIViewController {
         collectionView.lineType = .icon
         view.addSubview(collectionView)
         
+        // 底部的点击事件
         collectionView.cellSelected = { cellIndex in
             switch cellIndex {
                 // 背景
@@ -126,7 +128,7 @@ class UNContentViewController: UIViewController {
                     let vc = UNTextViewController()
                     self.present(vc, animated: true, completion: nil)
                     vc.complateHandler = { viewModel in
-                        let stickerLabel = UNSticerView(frame: CGRect(x: 150, y: 150, width: 100, height: 100))
+                        let stickerLabel = UNStickerView(frame: CGRect(x: 150, y: 150, width: 100, height: 100))
                         self.view.addSubview(stickerLabel)
                         stickerLabel.textViewModel = viewModel
                         self.stickerViews.append(stickerLabel)
@@ -273,31 +275,43 @@ class UNContentViewController: UIViewController {
             }
         }
     }
-    
-    /// 颜色
+
+    /// --- 颜色 --- 底部视图 颜色选择器
     private var colorBottomView: UNBottomColorViewController {
         get {
+            // 颜色弹窗。初始化 视图控制器（在UNBottomColorViewController中布局）
             let colorPopover = UNBottomColorViewController()
+            // 设置供选择的基础颜色
             colorPopover.colors = [UIColor.black, UIColor.white, UIColor.red, UIColor.blue, UIColor.green]
+            // 颜色轮盘的 当前选中颜色 是 当前背景颜色
             colorPopover.currentColor = self.view.backgroundColor!
+            // 推荐内容大小
             colorPopover.preferredContentSize = CGSize(width: 200, height: 280)
+            // 模式展示风格 气泡样式
             colorPopover.modalPresentationStyle = .popover
             
+            // 设置颜色弹窗的展示控制器（取出 设置弹窗的属性）
             let colorPopoverPVC = colorPopover.popoverPresentationController
+            // 源视图 所依赖的视图。（箭头指向底部功能栏）
             colorPopoverPVC?.sourceView = self.bottomCollectionView
+            // 在源视图中的位置。（底部功能栏 cell数组，指向cell中心点）
             colorPopoverPVC?.sourceRect = CGRect(x: bottomCollectionView!.cellCenterXs[0], y: 0, width: 0, height: 0)
+            // 箭头的朝向 向下
             colorPopoverPVC?.permittedArrowDirections = .down
             colorPopoverPVC?.delegate = self
             colorPopoverPVC?.backgroundColor = .white
             
-            // 颜色轮盘
+            // 颜色轮盘。
             colorPopover.colorChange = {
+                // 在圆盘选色时，调用该闭包 传出用户在轮盘上滚动时选出的颜色
                 self.view.backgroundColor = $0
+                // 设置背景颜色后m，要把渐变颜色的数组清除。避免冲突
                 self.bgColors.removeAll()
             }
             // 底部颜色栏
             colorPopover.bottomColorChange = {
-                self.bgColors.append($0)
+                // 选择底部颜色后，就要覆盖背景颜色
+                self.bgColors.append($0.cgColor)
             }
             
             return colorPopover
@@ -339,9 +353,11 @@ extension UNContentViewController: UIImagePickerControllerDelegate {
         let image = info[UIImagePickerController.InfoKey.editedImage] as? UIImage
         if image != nil {
             let wh = image!.size.width / image!.size.height
-            let sticker = UNSticerView(frame: CGRect(x: 150, y: 150, width: 100, height: 100 * wh))
+            // 初始化贴纸
+            let sticker = UNStickerView(frame: CGRect(x: 150, y: 150, width: 100, height: 100 * wh))
+            // 添加视图
             self.view.addSubview(sticker)
-            sticker.imgViewModel = UNSticerView.ImageStickerViewModel(image: image!)
+            sticker.imgViewModel = UNStickerView.ImageStickerViewModel(image: image!)
             // 添加到贴纸集合中
             self.stickerViews.append(sticker)
     

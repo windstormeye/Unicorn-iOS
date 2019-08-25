@@ -1,0 +1,6 @@
+module Pods_Unicorn {
+  umbrella header "Pods-Unicorn-umbrella.h"
+
+  export *
+  module * { export * }
+}

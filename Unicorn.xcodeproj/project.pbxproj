@@ -26,7 +26,7 @@
 		0C2019E92285C2CA00AE8C2B /* StickerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2019E82285C2CA00AE8C2B /* StickerService.swift */; };
 		0C51B80822490B1800046753 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C51B80722490B1800046753 /* UIView.swift */; };
 		0C51B80A22490C7E00046753 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C51B80922490C7E00046753 /* UIColor.swift */; };
-		0C51B80C22490FA600046753 /* UNSticerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C51B80B22490FA600046753 /* UNSticerView.swift */; };
+		0C51B80C22490FA600046753 /* UNStickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C51B80B22490FA600046753 /* UNStickerView.swift */; };
 		0C51B80F2249169B00046753 /* UNContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C51B80E2249169B00046753 /* UNContentViewController.swift */; };
 		0C6A987922756D72003E4AA5 /* UNBrushView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C6A987822756D72003E4AA5 /* UNBrushView.swift */; };
 		0C6A987B22756E81003E4AA5 /* UNCanvaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C6A987A22756E81003E4AA5 /* UNCanvaView.swift */; };
@@ -34,7 +34,6 @@
 		0C784A452253B4D500D1025A /* UNTextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C784A442253B4D500D1025A /* UNTextViewController.swift */; };
 		0C784A472253B8D700D1025A /* Define.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C784A462253B8D700D1025A /* Define.swift */; };
 		0C784A4F2255A69900D1025A /* UNLineCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C784A4D2255A69900D1025A /* UNLineCollectionViewCell.swift */; };
-		0C784A502255A69900D1025A /* UNLineCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C784A4E2255A69900D1025A /* UNLineCollectionViewLayout.swift */; };
 		0C784A522255A6AE00D1025A /* UNLineCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C784A512255A6AE00D1025A /* UNLineCollectionView.swift */; };
 		0C784A6522564A4F00D1025A /* UNBottomFontsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C784A6322564A4F00D1025A /* UNBottomFontsTableViewController.swift */; };
 		0C784A6A22564B2800D1025A /* UNBottomFontsTableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0C784A6922564B2800D1025A /* UNBottomFontsTableViewController.storyboard */; };
@@ -47,7 +46,6 @@
 		0CDB64732247CDB600ED48D0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CDB64722247CDB600ED48D0 /* AppDelegate.swift */; };
 		0CDB647A2247CDB700ED48D0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0CDB64792247CDB700ED48D0 /* Assets.xcassets */; };
 		0CDB647D2247CDB700ED48D0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0CDB647B2247CDB700ED48D0 /* LaunchScreen.storyboard */; };
-		0CDB64852247CE2900ED48D0 /* UNHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CDB64842247CE2900ED48D0 /* UNHomeViewController.swift */; };
 		0CDB648A224905F100ED48D0 /* UNTouchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CDB6489224905F100ED48D0 /* UNTouchView.swift */; };
 		D5A7F5A7EE589453EDC77B6E /* libPods-Unicorn.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B5A61EF5EBB6B4DDD2DD8C74 /* libPods-Unicorn.a */; };
 /* End PBXBuildFile section */
@@ -72,7 +70,7 @@
 		0C2019E82285C2CA00AE8C2B /* StickerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickerService.swift; sourceTree = "<group>"; };
 		0C51B80722490B1800046753 /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		0C51B80922490C7E00046753 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
-		0C51B80B22490FA600046753 /* UNSticerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UNSticerView.swift; sourceTree = "<group>"; };
+		0C51B80B22490FA600046753 /* UNStickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UNStickerView.swift; sourceTree = "<group>"; };
 		0C51B80E2249169B00046753 /* UNContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UNContentViewController.swift; sourceTree = "<group>"; };
 		0C6A987822756D72003E4AA5 /* UNBrushView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UNBrushView.swift; sourceTree = "<group>"; };
 		0C6A987A22756E81003E4AA5 /* UNCanvaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UNCanvaView.swift; sourceTree = "<group>"; };
@@ -80,7 +78,6 @@
 		0C784A442253B4D500D1025A /* UNTextViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UNTextViewController.swift; sourceTree = "<group>"; };
 		0C784A462253B8D700D1025A /* Define.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Define.swift; sourceTree = "<group>"; };
 		0C784A4D2255A69900D1025A /* UNLineCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UNLineCollectionViewCell.swift; sourceTree = "<group>"; };
-		0C784A4E2255A69900D1025A /* UNLineCollectionViewLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UNLineCollectionViewLayout.swift; sourceTree = "<group>"; };
 		0C784A512255A6AE00D1025A /* UNLineCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UNLineCollectionView.swift; sourceTree = "<group>"; };
 		0C784A5822563A9800D1025A /* FZZJ-MSMLJW.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FZZJ-MSMLJW.TTF"; sourceTree = "<group>"; };
 		0C784A5922563A9800D1025A /* FZZJ-HTKSJW.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FZZJ-HTKSJW.TTF"; sourceTree = "<group>"; };
@@ -95,7 +92,6 @@
 		0CDB64792247CDB700ED48D0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0CDB647C2247CDB700ED48D0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0CDB647E2247CDB700ED48D0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		0CDB64842247CE2900ED48D0 /* UNHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UNHomeViewController.swift; sourceTree = "<group>"; };
 		0CDB6489224905F100ED48D0 /* UNTouchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UNTouchView.swift; sourceTree = "<group>"; };
 		1501AEE6022D65928DA8578B /* Pods-Unicorn.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Unicorn.release.xcconfig"; path = "Pods/Target Support Files/Pods-Unicorn/Pods-Unicorn.release.xcconfig"; sourceTree = "<group>"; };
 		42DB928C04CA865E3C200A38 /* Pods-Unicorn.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Unicorn.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Unicorn/Pods-Unicorn.debug.xcconfig"; sourceTree = "<group>"; };
@@ -272,7 +268,6 @@
 			children = (
 				0C784A4D2255A69900D1025A /* UNLineCollectionViewCell.swift */,
 				0C784A512255A6AE00D1025A /* UNLineCollectionView.swift */,
-				0C784A4E2255A69900D1025A /* UNLineCollectionViewLayout.swift */,
 			);
 			path = BottomView;
 			sourceTree = "<group>";
@@ -324,7 +319,6 @@
 				0C784A482253B8E500D1025A /* Config */,
 				0C51B80622490AF700046753 /* Extension */,
 				0CDB64882249058C00ED48D0 /* Component */,
-				0CDB64862249053E00ED48D0 /* Home */,
 				0C784A5722563A3200D1025A /* Fonts */,
 				0CDB64792247CDB700ED48D0 /* Assets.xcassets */,
 				0CDB647B2247CDB700ED48D0 /* LaunchScreen.storyboard */,
@@ -333,19 +327,11 @@
 			path = Unicorn;
 			sourceTree = "<group>";
 		};
-		0CDB64862249053E00ED48D0 /* Home */ = {
-			isa = PBXGroup;
-			children = (
-				0CDB64842247CE2900ED48D0 /* UNHomeViewController.swift */,
-			);
-			path = Home;
-			sourceTree = "<group>";
-		};
 		0CDB64872249054C00ED48D0 /* Sticker */ = {
 			isa = PBXGroup;
 			children = (
 				0C2019EB2285C68600AE8C2B /* Services */,
-				0C51B80B22490FA600046753 /* UNSticerView.swift */,
+				0C51B80B22490FA600046753 /* UNStickerView.swift */,
 				0C6A987E22769C83003E4AA5 /* UNStickerComponentView.swift */,
 			);
 			path = Sticker;
@@ -494,13 +480,11 @@
 				0C784A6522564A4F00D1025A /* UNBottomFontsTableViewController.swift in Sources */,
 				0C2019D02281C1D200AE8C2B /* Network.swift in Sources */,
 				0C784A472253B8D700D1025A /* Define.swift in Sources */,
-				0C51B80C22490FA600046753 /* UNSticerView.swift in Sources */,
+				0C51B80C22490FA600046753 /* UNStickerView.swift in Sources */,
 				0C2019E12285236700AE8C2B /* UNNoteCreateViewController.swift in Sources */,
-				0C784A502255A69900D1025A /* UNLineCollectionViewLayout.swift in Sources */,
 				0CDB648A224905F100ED48D0 /* UNTouchView.swift in Sources */,
 				0C6A987F22769C83003E4AA5 /* UNStickerComponentView.swift in Sources */,
 				0C13E95922572B2F00346A2D /* EFColorComponentView.swift in Sources */,
-				0CDB64852247CE2900ED48D0 /* UNHomeViewController.swift in Sources */,
 				0C13E95322571CB500346A2D /* EFHSBView.swift in Sources */,
 				0C2019E32285474C00AE8C2B /* Note.swift in Sources */,
 				0C784A452253B4D500D1025A /* UNTextViewController.swift in Sources */,

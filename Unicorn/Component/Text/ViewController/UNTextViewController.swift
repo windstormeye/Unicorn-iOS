@@ -2,15 +2,14 @@
 //  UNTextViewController.swift
 //  Unicorn
 //
-//  Created by YiYi on 2019/4/2.
-//  Copyright © 2019 YiYi. All rights reserved.
+//  Created by PJHubs on 2019/4/2.
+//  Copyright © 2019 PJHubs. All rights reserved.
 //
 
 import UIKit
 
 class UNTextViewController: UIViewController {
-    var complateHandler: ((UNSticerView.TextStickerViewModel) -> Void)?
-    var textViewHeight: CGFloat?
+    var complateHandler: ((UNStickerView.TextStickerViewModel) -> Void)?
     
     private var textView = UITextView()
     private var bottomCollectionView: UNLineCollectionView?
@@ -24,7 +23,7 @@ class UNTextViewController: UIViewController {
                              "FZZJ-ZJJYBKTJW"]
     
     private let topViewBottom = topSafeAreaHeight + 10 + 30
-    private var viewModel: UNSticerView.TextStickerViewModel?
+    private var viewModel: UNStickerView.TextStickerViewModel?
     
     
     override func viewDidLoad() {
@@ -71,6 +70,7 @@ class UNTextViewController: UIViewController {
         collectionViewLayout.minimumLineSpacing = innerW
         collectionViewLayout.minimumInteritemSpacing = 10
         collectionViewLayout.scrollDirection = .horizontal
+        // 距离四周的间距
         collectionViewLayout.sectionInset = UIEdgeInsets(top: 0, left: innerW / 2, bottom: 0, right: innerW / 2)
         
         let collectionView = UNLineCollectionView(frame: CGRect(x: 0, y: view.height - bottomSafeAreaHeight - 64, width: view.width, height: 64), collectionViewLayout: collectionViewLayout)
@@ -112,10 +112,10 @@ class UNTextViewController: UIViewController {
         }
     }
     
+    //
     @objc
     fileprivate func doneButtonClick() {
-        let viewModel = UNSticerView.TextStickerViewModel(text: textView.text!, textColor: textView.textColor!, textFont: textView.font!)
-        textViewHeight = heightForString(textView: textView, textWidth: textView.width)
+        let viewModel = UNStickerView.TextStickerViewModel(text: textView.text!, textColor: textView.textColor!, textFont: textView.font!)
         complateHandler?(viewModel)
         dismiss(animated: true, completion: nil)
     }
@@ -129,22 +129,36 @@ class UNTextViewController: UIViewController {
     private var fontBottomView: UNBottomFontsTableViewController {
         get {
             let sb = UIStoryboard(name: "UNBottomFontsTableViewController", bundle: nil)
+            // 从Storyboard里面加载ViewController
             let fontPopover = sb.instantiateViewController(withIdentifier: "UNBottomFontsTableViewController") as! UNBottomFontsTableViewController;
+            // CGSize设置宽高
             fontPopover.preferredContentSize = CGSize(width: 150, height: 250)
+            // 弹出框样式
             fontPopover.modalPresentationStyle = .popover
+            // 字体集数据源
             fontPopover.fonts = self.textFonts
             
+            // 获取“泡”样式
             let fontPopoverPVC = fontPopover.popoverPresentationController
+            // 源视图 = 底部集合视图
             fontPopoverPVC?.sourceView = self.bottomCollectionView
+            //弹窗位于源视图的位置，气泡位置x：是cell的中心点位置。用cellCenterXs数组存中心点坐标
             fontPopoverPVC?.sourceRect = CGRect(x: bottomCollectionView!.cellCenterXs[0], y: 0, width: 0, height: 0)
+            // 设置（气泡）箭头方向
             fontPopoverPVC?.permittedArrowDirections = .down
+            // 设置操作（确保气泡能弹出）
             fontPopoverPVC?.delegate = self
             fontPopoverPVC?.backgroundColor = .white
             
+            // 反向传值（用来记录点击以后的选择）
             fontPopover.cellSelected = { selectedIndex in
+                // 文本框的字体 = 根据索引 从数组取字体名称
                 self.textView.font = UIFont(name: self.textFonts[selectedIndex], size: self.textView.font!.pointSize)
+                // 使气泡弹窗消失（用户选中字体后，选框消失）
                 fontPopover.dismiss(animated: true, completion: nil)
             }
+            
+            // 创建完成 返回气泡弹窗
             return fontPopover
         }
     }
@@ -175,8 +189,11 @@ class UNTextViewController: UIViewController {
     /// 颜色
     private var colorBottomView: UNBottomColorViewController {
         get {
+            // 整个“颜色”气泡弹窗
             let colorPopover = UNBottomColorViewController()
+            // itemColors 几个固定颜色的数组
             colorPopover.colors = itemColors
+            // 当前颜色 （从文本直接取）
             colorPopover.currentColor = self.textView.textColor
             colorPopover.preferredContentSize = CGSize(width: 200, height: 280)
             colorPopover.modalPresentationStyle = .popover
@@ -188,8 +205,12 @@ class UNTextViewController: UIViewController {
             colorPopoverPVC?.delegate = self
             colorPopoverPVC?.backgroundColor = .white
             
-            colorPopover.colorChange = { color in
-                self.textView.textColor = color
+            colorPopover.colorChange = {
+                self.textView.textColor = $0
+            }
+            // 底部颜色栏
+            colorPopover.bottomColorChange = {
+                self.textView.textColor = $0
             }
             
             return colorPopover
