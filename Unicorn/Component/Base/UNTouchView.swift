@@ -52,18 +52,20 @@ class UNTouchView: UIView {
         isUserInteractionEnabled = true
         
         // 设置在 normal 情况下的背景图片
+
+        // 关闭按钮（UIImage的名称）
         closeButton.setImage(UIImage(named: "story_maker_close"), for: .normal)
         closeButton.backgroundColor = .black
-        // 圆角
+        // 圆角半径
         closeButton.layer.cornerRadius = 12
-        // 裁剪
+        // 裁剪（切割超出圆角范围的子视图）
         closeButton.layer.masksToBounds = true
-        
+        // 不点击时 按钮隐藏
         closeButton.isHidden = true
-        // 添加触摸事件（按钮目标事件）（事件是给谁代理的）， 两者省略selector（用来选择方法的选择器），状态（此处是指点住才可拖动））
+        // 添加触摸事件（按钮目标事件）（事件是给谁代理的-本类）， 两者省略selector（用来选择方法的选择器），状态（按钮按下后才可执行））
         closeButton.addTarget(self, action: .close, for: .touchUpInside)
         
-        // pinchGesture 缩放手势
+        // pinchGesture 缩放手势（受理-当前类，调用方法）
         let pinchGesture = UIPinchGestureRecognizer(target: self, action: .pinch)
         pinchGesture.delegate = self
         // 给当前UNSticerView类 ，添加手势识别器
@@ -83,13 +85,14 @@ class UNTouchView: UIView {
         
         // TapGesture 单击/点击手势
         let tapGesture = UITapGestureRecognizer(target: self, action: .doubleTap)
-        // 双击
+        // 双击，设置所需的点击次数
         tapGesture.numberOfTapsRequired = 2
         // 给当前UNSticerView类 ，添加手势识别器
         addGestureRecognizer(tapGesture)
     }
     
-    // 添加进视图
+
+    // 添加进视图（关闭按钮要在贴纸左上角）
     private func initLayout() {
         closeButton.frame = CGRect(x: 0, y: 0, width: 24, height: 24)
         // 位置-在零点
@@ -97,11 +100,11 @@ class UNTouchView: UIView {
         addSubview(closeButton)
     }
     
-    // 点击关闭的方法
-
+    // 关闭按钮的点击方法 （点击关闭按钮 移除贴纸）
     @objc
     // 文件私有(文件内可调用这个方法)。 【 文件私有的范围 > 类私有 】
     fileprivate func closeButtonClick() {
+        // 此处考虑到在删除时提示用户。。
         // 是否遵守代理
         if viewDelegate != nil {
             // 遵守。执行方法
@@ -120,7 +123,7 @@ class UNTouchView: UIView {
         if gesture.state == .changed {
             // 当前矩阵2D变换  缩放通过（手势缩放的参数）
             transform = transform.scaledBy(x: gesture.scale, y: gesture.scale)
-            // 要复原到1（原尺寸），不要叠加放大
+            // 要复原到1（原尺寸），不要叠加放大（放大3缩小1）
             gesture.scale = 1
         }
     }
@@ -130,6 +133,7 @@ class UNTouchView: UIView {
     @objc
     fileprivate func rotateImage(gesture: UIRotationGestureRecognizer) {
         if gesture.state == .changed {
+            // 该手势中包含 手势旋转的弧度
             transform = transform.rotated(by: gesture.rotation)
             // 0为弧度制（要跟角度转换）
             gesture.rotation = 0
@@ -174,7 +178,8 @@ private extension Selector {
 }
 
 extension UNTouchView: UIGestureRecognizerDelegate {
-    // 是否允许多手势（是否在执行当前手势时 允许其他手势发生）-- 例如 放大旋转
+
+    // 是否允许多手势（是否在执行当前手势时 允许其他手势发生）
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         return true
     }

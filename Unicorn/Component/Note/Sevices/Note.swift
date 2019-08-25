@@ -8,6 +8,8 @@
 
 import UIKit
 
+// 提供增删改查服务（“M”）
+
 class Note {
     
     // 单例（此类就这一个对象）

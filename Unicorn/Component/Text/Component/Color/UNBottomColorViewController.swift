@@ -30,6 +30,7 @@ class UNBottomColorViewController: UIViewController {
     }
     
     private func initView() {
+        // EFColorPicker颜色选择器
         // 设置HSB色彩圆盘。H色相，S饱和度，B亮度（调用EFHSBView库-色彩圆盘）
         let colorView = EFHSBView(frame: CGRect(x: 0, y: 0, width: 200, height: 250))
         // 当前的颜色（保证下次点开颜色盘时还定留在上次选择的颜色）

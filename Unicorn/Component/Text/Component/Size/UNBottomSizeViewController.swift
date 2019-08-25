@@ -14,8 +14,9 @@ class UNBottomSizeViewController: UIViewController {
     var maxSize: CGFloat?
     var minSize: CGFloat?
     
-    // xib画出气泡弹窗样式 UISlider 为【大小】的调节样式；UILabel 调节下方的文字（数字）
+    // xib画出气泡弹窗样式 UISlider滑动条为【大小】的调节样式；
     @IBOutlet weak var sizeSlider: UISlider!
+    // UILabel 调节下方的文字（字号的数字）
     @IBOutlet private weak var sizeLabel: UILabel!
     
     // 反向闭包传值（用来给父视图传 文字大小的数值）
@@ -28,10 +29,12 @@ class UNBottomSizeViewController: UIViewController {
     }
     
     // 根据调节 改变数值（xib可设置，给横线调节组件sender 绑定value change状态）
+    // 改变数值时 调用
     @IBAction func sizeSliderTouching(_ sender: UISlider) {
-        // 获取“横线”sender的值
+        // 获取“横线”sender的值（取到UISlider的值）
         sizeLabel.text = "大小：\(Int(sender.value))"
-        // sizeChange闭包，反向传值。Float类型，需要整数，所以用ceilf向上取整。例如：23.111 -> 24
+        // sizeChange闭包，反向传值。获取到值传出
+        // Float类型，需要整数，所以用ceilf向上取整。例如：23.111 -> 24
         sizeChange?(CGFloat(ceilf(sender.value)))
     }
     
@@ -43,16 +46,18 @@ class UNBottomSizeViewController: UIViewController {
         // 父视图view的宽和高给v
         v.frame = view.frame
         
+        // 可以设置Slider字号数值滑动条的最大值最小值（也可用xib写）
         if maxSize != nil {
             sizeSlider.maximumValue = Float(maxSize!)
         }
-        
+
         if minSize != nil {
             sizeSlider.minimumValue = Float(minSize!)
         }
         
         // size必须有值
         if size != nil {
+            // 读当前大小
             sizeLabel.text = "大小：\(Int(size!))"
             // 保证下一次点开时还是之前选择的文字大小
             sizeSlider.value = Float(size!)

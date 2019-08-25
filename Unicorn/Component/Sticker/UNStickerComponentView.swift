@@ -40,7 +40,7 @@ class UNStickerComponentView: UIView {
         collectionView.lineType = .icon
         // iconTitle里设置默认为“home-”开头，但这里设为“贴纸”开头的 图（文件夹Assets里的资源）
         collectionView.iconTitle = "贴纸"
-        collectionView.iconCount = 10
+        collectionView.iconCount = 17
         addSubview(collectionView)
         
         collectionView.cellSelected = { cellIndex in

@@ -10,7 +10,7 @@ import UIKit
 
 // 点击下栏按钮后弹出的选项：是列表视图 UITableViewController
 class UNBottomFontsTableViewController: UITableViewController {
-    // 字体数据源（字符串数组）
+    // 字体数据源（字符串数组）（字符串数据源 传进来）
     var fonts = [String]() {didSet{ tableView.reloadData() }}
     var cellSelected: ((Int) -> Void)?
     
@@ -32,7 +32,7 @@ class UNBottomFontsTableViewController: UITableViewController {
         // 要将cell注册进视图里，给cell标识符
         let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
         cell.textLabel?.text = "这是字体"
-        // 赋值字体。（字体数据源数组）
+        // 赋值字体。（字体数据源数组）字体 - 根据cell下标索引取fonts数据源里的数据
         cell.textLabel?.font = UIFont(name: fonts[indexPath.row], size: 20)
         return cell
     }

@@ -8,6 +8,7 @@
 
 import UIKit
 
+// 画布视图
 class UNCanvaView: UIView {
     /// 告知系统当前 UIView.layer = CAShapeLayer
     override class var layerClass : AnyClass {
@@ -17,6 +18,7 @@ class UNCanvaView: UIView {
     }
     
     /// 设置画笔
+    // 通过 UNBrush结构体 完成
     func brunsh(brush: UNBrushView.UNBrush?) {
         let shapeLayer = self.layer as! CAShapeLayer
         // 设置填充颜色
